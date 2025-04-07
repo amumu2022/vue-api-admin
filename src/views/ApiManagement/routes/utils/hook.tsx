@@ -163,20 +163,18 @@ export function useDept() {
     {
       label: "操作",
       fixed: "right",
-      width: 180,
+      width: 80,
       slot: "operation",
       cellRenderer: ({ row }) => {
         return row.path ? (
           <div>
             <el-button
               class="reset-margin"
-              link
+              circle
               type="primary"
               icon={useRenderIcon(EditPen)}
               onClick={() => openDialog("修改", row)}
-            >
-              修改
-            </el-button>
+            ></el-button>
           </div>
         ) : (
           ""

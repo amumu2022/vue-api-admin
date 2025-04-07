@@ -75,6 +75,11 @@ export function useRole() {
       )
     },
     {
+      label: "地址信息",
+      prop: "addr",
+      minWidth: 130
+    },
+    {
       label: "永封状态",
       prop: "enable",
       minWidth: 90,
