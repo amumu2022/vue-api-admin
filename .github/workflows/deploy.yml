@@ -2,33 +2,33 @@ name: Build 和 Deploy
 
 on:
   push:
-    branches: [ "master" ] # 触发分支
+    branches: ["master"] # 触发分支
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:  # 关键授权配置
-      contents: write  # 允许写入仓库
-      pages: write     # 如果需要部署到 GitHub Pages
-      id-token: write  # 如果需要 OIDC 认证
- 
+    permissions: # 关键授权配置
+      contents: write # 允许写入仓库
+      pages: write # 如果需要部署到 GitHub Pages
+      id-token: write # 如果需要 OIDC 认证
+
     steps:
       - uses: actions/checkout@v4
-    
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: 9
-    
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
-    
+          cache: "pnpm"
+
       - name: Install dependencies
         run: pnpm install
-    
+
       - name: Build
         run: pnpm build
 
@@ -40,7 +40,9 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v3
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
@@ -48,8 +50,10 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v2
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist.zip
@@ -59,6 +63,6 @@ jobs:
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 自动注入的 token
-          publish_dir: ./dist  # 替换为你的构建输出目录
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自动注入的 token
+          publish_dir: ./dist # 替换为你的构建输出目录
           enable_jekyll: false
