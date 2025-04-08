@@ -34,7 +34,9 @@ const {
   openDialog,
   onSearch,
   resetForm,
-  handleDelete
+  handleDelete,
+  handleSizeChange,
+  handleCurrentChange
 } = useRole();
 </script>
 
@@ -134,6 +136,8 @@ const {
             background: 'var(--el-fill-color-light)',
             color: 'var(--el-text-color-primary)'
           }"
+          @page-size-change="handleSizeChange"
+          @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
             <el-button

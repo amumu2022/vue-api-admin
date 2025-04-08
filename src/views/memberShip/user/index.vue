@@ -43,6 +43,8 @@ const {
   handleUpdate,
   handleDelete,
   handleReset,
+  handleSizeChange,
+  handleCurrentChange,
   handleRole
 } = useUser(tableRef);
 </script>
@@ -145,6 +147,8 @@ const {
               background: 'var(--el-fill-color-light)',
               color: 'var(--el-text-color-primary)'
             }"
+            @page-size-change="handleSizeChange"
+            @page-current-change="handleCurrentChange"
           >
             <template #operation="{ row }">
               <el-button

@@ -36,13 +36,11 @@ jobs:
         run: sudo apt-get install -y zip
 
       - name: Zip build output
-        run: zip -r build-output.zip ./dist
+        run: zip -r dist.zip ./dist
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/create-release@v3
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
@@ -51,9 +49,7 @@ jobs:
 
       - name: Upload Release Asset
         id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/upload-release-asset@v2
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./dist.zip

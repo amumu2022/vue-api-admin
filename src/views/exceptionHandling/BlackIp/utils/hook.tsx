@@ -265,6 +265,17 @@ export function useRole() {
     });
   }
 
+  function handleSizeChange(val: number) {
+    form.currentPage = 1;
+    form.pageSize = val;
+    onSearch();
+  }
+
+  function handleCurrentChange(val: number) {
+    form.currentPage = val;
+    onSearch();
+  }
+
   async function onSearch() {
     loading.value = true;
     const { data } = await getIpList(toRaw(form));
@@ -296,6 +307,8 @@ export function useRole() {
     openDialog,
     onSearch,
     resetForm,
+    handleSizeChange,
+    handleCurrentChange,
     handleDelete
   };
 }

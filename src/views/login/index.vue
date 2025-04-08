@@ -10,8 +10,19 @@ import { useUserStoreHook } from "@/store/modules/user";
 import { initRouter, getTopMenu } from "@/router/utils";
 import { bg, avatar, illustration } from "./utils/static";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import { ref, reactive, toRaw, onMounted, onBeforeUnmount } from "vue";
+import {
+  ref,
+  reactive,
+  toRaw,
+  onMounted,
+  watch,
+  computed,
+  onBeforeUnmount
+} from "vue";
 import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
+
+import regist from "./components/register.vue";
+import update from "./components/resetPassword.vue";
 
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
@@ -21,11 +32,16 @@ import User from "@iconify-icons/ri/user-3-fill";
 defineOptions({
   name: "Login"
 });
+
+const imgCode = ref("");
+const loginDay = ref(7);
 const router = useRouter();
 const loading = ref(false);
 const checked = ref(false);
 const ruleFormRef = ref<FormInstance>();
-
+const currentPage = computed(() => {
+  return useUserStoreHook().currentPage;
+});
 const { initStorage } = useLayout();
 initStorage();
 
@@ -79,6 +95,13 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.document.removeEventListener("keypress", onkeypress);
 });
+
+watch(checked, bool => {
+  useUserStoreHook().SET_ISREMEMBERED(bool);
+});
+watch(loginDay, value => {
+  useUserStoreHook().SET_LOGINDAY(value);
+});
 </script>
 
 <template>
@@ -106,6 +129,7 @@ onBeforeUnmount(() => {
           </Motion>
 
           <el-form
+            v-if="currentPage === 0"
             ref="ruleFormRef"
             :model="ruleForm"
             :rules="loginRules"
@@ -154,7 +178,7 @@ onBeforeUnmount(() => {
                   <el-button
                     link
                     type="primary"
-                    @click="useUserStoreHook().SET_CURRENTPAGE(4)"
+                    @click="useUserStoreHook().SET_CURRENTPAGE(2)"
                   >
                     {{ "忘记密码?" }}
                   </el-button>
@@ -170,7 +194,30 @@ onBeforeUnmount(() => {
                 </el-button>
               </el-form-item>
             </Motion>
+
+            <Motion :delay="300">
+              <el-form-item>
+                <div class="w-full h-[20px] flex justify-between items-center">
+                  <el-button
+                    class="w-full mt-4"
+                    size="default"
+                    @click="useUserStoreHook().SET_CURRENTPAGE(1)"
+                  >
+                    获取Token
+                  </el-button>
+                </div>
+              </el-form-item>
+            </Motion>
           </el-form>
+
+          <!-- 手机号登录 -->
+          <!-- <phone v-if="currentPage === 1" /> -->
+          <!-- 二维码登录 -->
+          <!-- <phone v-if="currentPage === 2" /> -->
+          <!-- 注册 -->
+          <regist v-if="currentPage === 1" />
+          <!-- 忘记密码 -->
+          <update v-if="currentPage === 2" />
         </div>
       </div>
     </div>
@@ -184,5 +231,11 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 :deep(.el-input-group__append, .el-input-group__prepend) {
   padding: 0;
+}
+
+.translation {
+  ::v-deep(.el-dropdown-menu__item) {
+    padding: 5px 40px;
+  }
 }
 </style>
