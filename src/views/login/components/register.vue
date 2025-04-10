@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, h } from "vue";
 import Motion from "../utils/motion";
 import { message } from "@/utils/message";
 import { updateRules } from "../utils/rule";
@@ -10,10 +10,15 @@ import Lock from "@iconify-icons/ri/lock-fill";
 import Iphone from "@iconify-icons/ep/iphone";
 import User from "@iconify-icons/ri/user-3-fill";
 import { useUserStoreHook } from "@/store/modules/user";
+import { RegisterUser } from "@/api/apiCtrl/memberShip";
+import { SendVerifyCodeEmail } from "@/api/system/api";
+import { ElMessageBox } from "element-plus";
+import TokenDialog from "./TokenDialog.vue";
+
 defineProps({
   currentPage: {
     type: Number,
-    default: 3
+    default: 1
   }
 });
 
@@ -21,13 +26,32 @@ const checked = ref(false);
 const loading = ref(false);
 const ruleForm = reactive({
   username: "",
-  phone: "",
+  email: "",
   verifyCode: "",
   password: "",
   repeatPassword: ""
 });
 const ruleFormRef = ref<FormInstance>();
-const { isDisabled, text } = useVerifyCode();
+const { isDisabled, text, start } = useVerifyCode();
+
+const handleSendVerifyCode = async () => {
+  if (!ruleForm.email) {
+    message("请输入邮箱账号", { type: "warning" });
+    return;
+  }
+  try {
+    const data = await SendVerifyCodeEmail(ruleForm.email);
+    const { success } = data;
+    start(ruleFormRef.value, "email");
+    if (!success) {
+      message(data.message, { type: "error" });
+      return;
+    } else {
+      message("验证码已发送", { type: "success" });
+    }
+  } catch (error) {}
+};
+
 const repeatPasswordRule = [
   {
     validator: (rule, value, callback) => {
@@ -48,15 +72,29 @@ const onUpdate = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   try {
     await formEl.validate();
-    // 模拟请求，需根据实际开发进行修改
     if (checked.value) {
-      // 模拟请求，需根据实际开发进行修改
-      setTimeout(() => {
-        message("注册成功", {
-          type: "success"
-        });
+      const data = await RegisterUser({
+        username: ruleForm.username,
+        email: ruleForm.email,
+        verifyCode: ruleForm.verifyCode,
+        password: ruleForm.password
+      });
+      const { success } = data;
+      if (!success) {
+        message(data.message, { type: "error" });
         loading.value = false;
-      }, 2000);
+        return;
+      }
+      loading.value = false;
+      if (data.data) {
+        ElMessageBox({
+          title: "注册成功",
+          message: h(TokenDialog, { userData: data.data }),
+          showConfirmButton: false,
+          showCancelButton: false,
+          closeOnClickModal: false
+        });
+      }
     } else {
       loading.value = false;
       message("请勾选隐私政策", { type: "warning" });
@@ -93,16 +131,16 @@ function onBack() {
         <el-input
           v-model="ruleForm.username"
           clearable
-          placeholder="账号"
+          placeholder="用户账号"
           :prefix-icon="useRenderIcon(User)"
         />
       </el-form-item>
     </Motion>
 
     <Motion :delay="100">
-      <el-form-item prop="phone">
+      <el-form-item prop="email">
         <el-input
-          v-model="ruleForm.phone"
+          v-model="ruleForm.email"
           clearable
           placeholder="邮箱账号"
           :prefix-icon="useRenderIcon(Iphone)"
@@ -122,7 +160,7 @@ function onBack() {
           <el-button
             :disabled="isDisabled"
             class="ml-2"
-            @click="useVerifyCode().start(ruleFormRef, 'phone')"
+            @click="handleSendVerifyCode"
           >
             {{ text.length > 0 ? text + "秒后重新获取" : "获取验证码" }}
           </el-button>
@@ -170,7 +208,7 @@ function onBack() {
           :loading="loading"
           @click="onUpdate(ruleFormRef)"
         >
-          确定
+          确定注册
         </el-button>
       </el-form-item>
     </Motion>

@@ -24,6 +24,13 @@ type Result = {
   };
 };
 
+type TResult = {
+  success: boolean;
+  code: number;
+  message: string;
+  data: any;
+};
+
 /** 获取用户列表 */
 export const getUserList = (data?: object) => {
   return http.request<Result_table>("post", "/api/user/list", {
@@ -34,6 +41,11 @@ export const getUserList = (data?: object) => {
 /** 新增用户 */
 export const AddUser = (data?: object) => {
   return http.request<Result>("post", "/api/user/create", { data });
+};
+
+/** 用户注册 */
+export const RegisterUser = (data?: object) => {
+  return http.request<TResult>("post", "/api/user/register", { data });
 };
 
 /** 删除用户 */
@@ -58,4 +70,18 @@ export const getUserInfo = (userId: number) => {
 /** 用户管理-获取所有角色列表 */
 export const getAllRoleList = () => {
   return http.request<Result_table>("get", "/api/user/role/list");
+};
+
+/** 获取用户信息-开放 */
+export const userInfo = (data: object | string) => {
+  return http.request<TResult>("post", "/api/account/user/info", {
+    data
+  });
+};
+
+/** 自助-重置token */
+export const resetToken = (data: object | string) => {
+  return http.request<TResult>("put", "/api/account/user/resetToken", {
+    data
+  });
 };

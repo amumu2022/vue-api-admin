@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, h } from "vue";
 import Motion from "../utils/motion";
 import { message } from "@/utils/message";
 import { updateRules } from "../utils/rule";
@@ -7,55 +7,76 @@ import type { FormInstance } from "element-plus";
 import { useVerifyCode } from "../utils/verifyCode";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Lock from "@iconify-icons/ri/lock-fill";
-import email from "@iconify-icons/ep/iphone";
 import User from "@iconify-icons/ri/user-3-fill";
-
+import email from "@iconify-icons/ep/iphone";
 import { useUserStoreHook } from "@/store/modules/user";
 import { SendVerifyCodeEmail } from "@/api/system/api";
+import { resetToken } from "@/api/apiCtrl/memberShip";
+import { ElMessageBox } from "element-plus";
+import TokenDialog from "./TokenDialog.vue";
 
 defineProps({
   currentPage: {
     type: Number,
-    default: 2
+    default: 4
   }
 });
 const loading = ref(false);
 const ruleForm = reactive({
   email: "",
   verifyCode: "",
-  password: "",
-  repeatPassword: ""
+  token: "",
+  username: ""
 });
 const ruleFormRef = ref<FormInstance>();
-const { isDisabled, text } = useVerifyCode();
-const repeatPasswordRule = [
-  {
-    validator: (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入确认密码"));
-      } else if (ruleForm.password !== value) {
-        callback(new Error("两次密码不一致"));
-      } else {
-        callback();
-      }
-    },
-    trigger: "blur"
-  }
-];
+const { isDisabled, text, start } = useVerifyCode();
 
-const onUpdate = async (formEl: FormInstance | undefined) => {
+const handleSendVerifyCode = async () => {
+  if (!ruleForm.email) {
+    message("请输入邮箱账号", { type: "warning" });
+    return;
+  }
+  try {
+    const data = await SendVerifyCodeEmail(ruleForm.email);
+    const { success } = data;
+    start(ruleFormRef.value, "email");
+    if (!success) {
+      message(data.message, { type: "error" });
+      return;
+    } else {
+      message("验证码已发送", { type: "success" });
+    }
+  } catch (error) {}
+};
+
+const resetUserToken = async (formEl: FormInstance | undefined) => {
   loading.value = true;
   if (!formEl) return;
   try {
     await formEl.validate();
-    // 模拟请求，需根据实际开发进行修改
-    setTimeout(() => {
-      message("修改密码成功", {
-        type: "success"
-      });
+    const data = await resetToken({
+      email: ruleForm.email,
+      verifyCode: ruleForm.verifyCode,
+      username: ruleForm.username,
+      token: ruleForm.token
+    });
+    const { success } = data;
+    if (!success) {
+      message(data.message, { type: "error" });
       loading.value = false;
-    }, 2000);
-  } catch (fields) {
+      return;
+    }
+    loading.value = false;
+    if (data.data) {
+      ElMessageBox({
+        title: "重置Token成功",
+        message: h(TokenDialog, { userData: data.data }),
+        showConfirmButton: false,
+        showCancelButton: false,
+        closeOnClickModal: false
+      });
+    }
+  } catch (error: any) {
     loading.value = false;
   }
 };
@@ -72,6 +93,29 @@ function onBack() {
     :rules="updateRules"
     size="large"
   >
+    <Motion>
+      <el-form-item prop="username">
+        <el-input
+          v-model="ruleForm.username"
+          clearable
+          placeholder="用户账号"
+          :prefix-icon="useRenderIcon(User)"
+        />
+      </el-form-item>
+    </Motion>
+
+    <Motion :delay="150">
+      <el-form-item prop="token">
+        <el-input
+          v-model="ruleForm.token"
+          clearable
+          show-password
+          placeholder="原始Token"
+          :prefix-icon="useRenderIcon(Lock)"
+        />
+      </el-form-item>
+    </Motion>
+
     <Motion>
       <el-form-item prop="email">
         <el-input
@@ -95,35 +139,11 @@ function onBack() {
           <el-button
             :disabled="isDisabled"
             class="ml-2"
-            @click="useVerifyCode().start(ruleFormRef, 'phone')"
+            @click="handleSendVerifyCode"
           >
             {{ text.length > 0 ? text + "秒后重新获取" : "获取验证码" }}
           </el-button>
         </div>
-      </el-form-item>
-    </Motion>
-
-    <Motion :delay="150">
-      <el-form-item prop="password">
-        <el-input
-          v-model="ruleForm.password"
-          clearable
-          show-password
-          placeholder="密码"
-          :prefix-icon="useRenderIcon(Lock)"
-        />
-      </el-form-item>
-    </Motion>
-
-    <Motion :delay="200">
-      <el-form-item :rules="repeatPasswordRule" prop="repeatPassword">
-        <el-input
-          v-model="ruleForm.repeatPassword"
-          clearable
-          show-password
-          placeholder="确认密码"
-          :prefix-icon="useRenderIcon(Lock)"
-        />
       </el-form-item>
     </Motion>
 
@@ -134,9 +154,9 @@ function onBack() {
           size="default"
           type="primary"
           :loading="loading"
-          @click="onUpdate(ruleFormRef)"
+          @click="resetUserToken(ruleFormRef)"
         >
-          确定
+          确定重置
         </el-button>
       </el-form-item>
     </Motion>

@@ -23,6 +23,8 @@ import { useDataThemeChange } from "@/layout/hooks/useDataThemeChange";
 
 import regist from "./components/register.vue";
 import update from "./components/resetPassword.vue";
+import resetToken from "./components/resetToken.vue";
+import userSearch from "./components/userSearch.vue";
 
 import dayIcon from "@/assets/svg/day.svg?component";
 import darkIcon from "@/assets/svg/dark.svg?component";
@@ -205,6 +207,22 @@ watch(loginDay, value => {
                   >
                     获取Token
                   </el-button>
+
+                  <el-button
+                    class="w-full mt-4"
+                    size="default"
+                    @click="useUserStoreHook().SET_CURRENTPAGE(3)"
+                  >
+                    用户查询
+                  </el-button>
+
+                  <el-button
+                    class="w-full mt-4"
+                    size="default"
+                    @click="useUserStoreHook().SET_CURRENTPAGE(4)"
+                  >
+                    Token重置
+                  </el-button>
                 </div>
               </el-form-item>
             </Motion>
@@ -218,6 +236,10 @@ watch(loginDay, value => {
           <regist v-if="currentPage === 1" />
           <!-- 忘记密码 -->
           <update v-if="currentPage === 2" />
+          <!-- 查询用户信息 -->
+          <userSearch v-if="currentPage === 3" />
+          <!-- Token重置 -->
+          <resetToken v-if="currentPage === 4" />
         </div>
       </div>
     </div>
