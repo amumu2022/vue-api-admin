@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { InfoFilled } from "@element-plus/icons-vue";
-import { formRules } from "../utils/rule";
+import { emailConfigRules, emailSendRules } from "../utils/rule";
 import { FormProps } from "../utils/types";
 import { message } from "@/utils/message";
 import { ref, onBeforeMount } from "vue";
@@ -59,12 +59,12 @@ const props = withDefaults(defineProps<FormProps>(), {
     email: {
       email: "",
       code: "",
-      observer: ""
+      observer: "smtp.qq.com"
     },
     emailSend: {
       plain: 1,
-      receiving: "",
-      title: "",
+      mailto_list: "",
+      title: "晚风API",
       text: ""
     }
   })
@@ -90,7 +90,7 @@ async function reloadSendEmail() {
     const back = data[0].data;
     newFormInline.value.emailSend = {
       plain: back?.plain,
-      receiving: back?.receiving,
+      mailto_list: back?.mailto_list,
       text: back?.text,
       title: back?.title
     };
@@ -121,7 +121,7 @@ async function sendEmail() {
     if (req.success) {
       message(req.message, { type: "success" });
     } else {
-      message(`操作失败，${req.message}`, { type: "warning" });
+      message(req.message, { type: "warning" });
     }
   } else {
     message(`操作失败，${data.message}`, { type: "warning" });
@@ -150,7 +150,7 @@ onBeforeMount(() => {
         <el-form
           ref="formRef"
           :model="newFormInline"
-          :rules="formRules"
+          :rules="emailConfigRules"
           label-position="left"
           label-width="80px"
           size="default"
@@ -213,7 +213,7 @@ onBeforeMount(() => {
         <el-form
           ref="formRef"
           :model="newFormInline"
-          :rules="formRules"
+          :rules="emailSendRules"
           label-position="left"
           label-width="80px"
           size="default"
@@ -234,9 +234,9 @@ onBeforeMount(() => {
             </el-col>
 
             <el-col :md="24" :sm="24" :xs="24">
-              <el-form-item label="收信账户" prop="receiving">
+              <el-form-item label="收信账户" prop="mailto_list">
                 <el-input
-                  v-model="newFormInline.emailSend.receiving"
+                  v-model="newFormInline.emailSend.mailto_list"
                   type="text"
                   clearable
                   placeholder="请输入收信账户"

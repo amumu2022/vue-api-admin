@@ -27,7 +27,7 @@ interface EmailSend {
   code?: string;
   observer?: string;
   plain?: number;
-  receiving?: string;
+  mailto_list?: string;
   title?: string;
   text?: string;
 }
