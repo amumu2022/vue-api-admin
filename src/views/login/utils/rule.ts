@@ -1,12 +1,13 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-03-18 19:02:18
- * @LastEditTime: 2025-04-10 21:30:29
+ * @LastEditTime: 2025-04-11 21:48:36
  * @LastEditors: XDTEAM
  * @Description:
  */
 import { reactive } from "vue";
 import type { FormRules } from "element-plus";
+import { isEmail } from "@pureadmin/utils";
 
 /** 6位数字验证码正则 */
 export const REGEXP_SIX = /^\d{6}$/;
@@ -59,7 +60,7 @@ const updateRules = reactive<FormRules>({
       validator: (rule, value, callback) => {
         if (value === "") {
           callback(new Error("请输入邮箱地址"));
-        } else if (!REGEXP_EMAIL.test(value)) {
+        } else if (!isEmail(value)) {
           callback(new Error("请输入正确的邮箱地址格式"));
         } else {
           callback();

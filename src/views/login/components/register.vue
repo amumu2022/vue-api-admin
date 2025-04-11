@@ -118,16 +118,7 @@ function onBack() {
     size="large"
   >
     <Motion>
-      <el-form-item
-        :rules="[
-          {
-            required: true,
-            message: '请输入账号',
-            trigger: 'blur'
-          }
-        ]"
-        prop="username"
-      >
+      <el-form-item prop="username">
         <el-input
           v-model="ruleForm.username"
           clearable

@@ -1,24 +1,23 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-04-08 22:17:34
- * @LastEditTime: 2025-04-10 22:58:58
+ * @LastEditTime: 2025-04-11 21:36:18
  * @LastEditors: XDTEAM
  * @Description:
  */
 import { reactive } from "vue";
 import type { FormRules } from "element-plus";
-
-/** 定义邮箱正则表达式 */
-export const REGEXP_EMAIL = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
+import { isEmail } from "@pureadmin/utils";
 /** 邮箱配置表单规则校验 */
 const emailConfigRules = reactive<FormRules>({
   email: [
     {
       validator: (rule, value, callback) => {
+        console.log("isEmail", isEmail(value), value);
+
         if (value === "") {
           callback(new Error("请输入邮箱地址"));
-        } else if (!REGEXP_EMAIL.test(value)) {
+        } else if (!isEmail(value)) {
           callback(new Error("请输入正确的邮箱地址格式"));
         } else {
           callback();
@@ -30,6 +29,8 @@ const emailConfigRules = reactive<FormRules>({
   code: [
     {
       validator: (rule, value, callback) => {
+        console.log("isEmail", isEmail(value), value);
+
         if (value === "") {
           callback(new Error("请输入授权码"));
         } else {
@@ -42,6 +43,7 @@ const emailConfigRules = reactive<FormRules>({
   observer: [
     {
       validator: (rule, value, callback) => {
+        value = value.observer;
         if (value === "") {
           callback(new Error("请选择运行商"));
         } else {
@@ -60,7 +62,8 @@ const emailSendRules = reactive<FormRules>({
       validator: (rule, value, callback) => {
         if (value === "") {
           callback(new Error("请输入邮箱地址"));
-        } else if (!REGEXP_EMAIL.test(value)) {
+        } else if (!isEmail(value)) {
+          console.log("isEmail", isEmail(value), value);
           callback(new Error("请输入正确的邮箱地址格式"));
         } else {
           callback();
@@ -72,6 +75,7 @@ const emailSendRules = reactive<FormRules>({
   title: [
     {
       validator: (rule, value, callback) => {
+        value = value.title;
         if (value === "") {
           callback(new Error("邮件主题为必填项"));
         } else {
@@ -84,6 +88,7 @@ const emailSendRules = reactive<FormRules>({
   text: [
     {
       validator: (rule, value, callback) => {
+        value = value.text;
         if (value === "") {
           callback(new Error("邮件内容为必填项"));
         } else {

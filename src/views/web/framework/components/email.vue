@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { InfoFilled } from "@element-plus/icons-vue";
 import { emailConfigRules, emailSendRules } from "../utils/rule";
-import { FormProps } from "../utils/types";
+import { EmailSet, EmailSend } from "../utils/types";
 import { message } from "@/utils/message";
 import { ref, onBeforeMount } from "vue";
 import { getDockData, UpdateDock } from "@/api/system/dock";
@@ -54,20 +54,17 @@ const SendOptions = [
 
 const formRef = ref();
 
-const props = withDefaults(defineProps<FormProps>(), {
-  formInline: () => ({
-    email: {
-      email: "",
-      code: "",
-      observer: "smtp.qq.com"
-    },
-    emailSend: {
-      plain: 1,
-      mailto_list: "",
-      title: "晚风API",
-      text: ""
-    }
-  })
+const emailSetProps = ref({
+  email: "",
+  code: "",
+  observer: ""
+});
+
+const emailSendProps = ref({
+  plain: 1,
+  mailto_list: "",
+  title: "",
+  text: ""
 });
 
 async function reloadEmail() {
@@ -75,7 +72,7 @@ async function reloadEmail() {
   const { data } = await getDockData(post_data);
   if (data.length != 0) {
     const back = data[0].data;
-    newFormInline.value.email = {
+    emailSetProps.value = {
       code: back?.code,
       email: back?.email,
       observer: back?.observer
@@ -88,7 +85,7 @@ async function reloadSendEmail() {
   const { data } = await getDockData(post_data);
   if (data.length != 0) {
     const back = data[0].data;
-    newFormInline.value.emailSend = {
+    emailSendProps.value = {
       plain: back?.plain,
       mailto_list: back?.mailto_list,
       text: back?.text,
@@ -98,7 +95,7 @@ async function reloadSendEmail() {
 }
 
 async function saveEmail() {
-  const post_data = { name: "email", data: newFormInline.value.email };
+  const post_data = { name: "email", data: emailSetProps };
   const data = await UpdateDock("email", post_data);
   if (data.success) {
     message(data.message, { type: "success" });
@@ -109,10 +106,7 @@ async function saveEmail() {
 }
 
 async function sendEmail() {
-  newFormInline.value.emailSend.code = newFormInline.value.email.code;
-  newFormInline.value.emailSend.observer = newFormInline.value.email.observer;
-  newFormInline.value.emailSend.email = newFormInline.value.email.email;
-  const send_data = newFormInline.value.emailSend;
+  const send_data = emailSendProps;
 
   const post_data = { name: "emailSend", data: send_data };
   const data = await UpdateDock("emailSend", post_data);
@@ -127,8 +121,6 @@ async function sendEmail() {
     message(`操作失败，${data.message}`, { type: "warning" });
   }
 }
-
-const newFormInline = ref(props.formInline);
 
 onBeforeMount(() => {
   reloadEmail();
@@ -146,10 +138,9 @@ onBeforeMount(() => {
             <info-filled />
           </el-icon>
         </template>
-
         <el-form
           ref="formRef"
-          :model="newFormInline"
+          :model="emailSetProps"
           :rules="emailConfigRules"
           label-position="left"
           label-width="80px"
@@ -160,7 +151,7 @@ onBeforeMount(() => {
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="邮箱账号" prop="email">
                 <el-input
-                  v-model="newFormInline.email.email"
+                  v-model="emailSetProps.email"
                   type="text"
                   clearable
                   placeholder="请输入邮箱账号"
@@ -169,9 +160,19 @@ onBeforeMount(() => {
             </el-col>
 
             <el-col :md="24" :sm="24" :xs="24">
-              <el-form-item label="授权码" prop="code">
+              <el-form-item
+                :rules="[
+                  {
+                    required: true,
+                    message: '请输入账号',
+                    trigger: 'blur'
+                  }
+                ]"
+                label="授权码"
+                prop="code"
+              >
                 <el-input
-                  v-model="newFormInline.email.code"
+                  v-model="emailSetProps.code"
                   type="password"
                   clearable
                   placeholder="请输入授权码"
@@ -181,7 +182,7 @@ onBeforeMount(() => {
 
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="服务地址" prop="observer">
-                <el-select v-model="newFormInline.email.observer" clearable>
+                <el-select v-model="emailSetProps.observer" clearable>
                   <el-option
                     v-for="(item, index) in EmailOptions"
                     :key="index"
@@ -212,7 +213,7 @@ onBeforeMount(() => {
       <el-collapse-item title="邮箱发信" name="2">
         <el-form
           ref="formRef"
-          :model="newFormInline"
+          :model="emailSendProps"
           :rules="emailSendRules"
           label-position="left"
           label-width="80px"
@@ -222,7 +223,7 @@ onBeforeMount(() => {
           <el-row>
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="发信类型" prop="plain">
-                <el-select v-model="newFormInline.emailSend.plain" clearable>
+                <el-select v-model="emailSendProps.plain" clearable>
                   <el-option
                     v-for="(item, index) in SendOptions"
                     :key="index"
@@ -236,7 +237,7 @@ onBeforeMount(() => {
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="收信账户" prop="mailto_list">
                 <el-input
-                  v-model="newFormInline.emailSend.mailto_list"
+                  v-model="emailSendProps.mailto_list"
                   type="text"
                   clearable
                   placeholder="请输入收信账户"
@@ -247,7 +248,7 @@ onBeforeMount(() => {
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="邮件主题" prop="title">
                 <el-input
-                  v-model="newFormInline.emailSend.title"
+                  v-model="emailSendProps.title"
                   type="text"
                   clearable
                   placeholder="请输入邮件主题"
@@ -258,7 +259,7 @@ onBeforeMount(() => {
             <el-col :md="24" :sm="24" :xs="24">
               <el-form-item label="邮件内容" prop="text">
                 <el-input
-                  v-model="newFormInline.emailSend.text"
+                  v-model="emailSendProps.text"
                   :rows="10"
                   resize="none"
                   clearable
