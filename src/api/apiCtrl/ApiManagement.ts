@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-03-22 22:51:49
- * @LastEditTime: 2025-03-28 19:37:17
+ * @LastEditTime: 2025-04-12 19:48:28
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -21,6 +21,13 @@ type Result = {
 /** 获取api列表 */
 export const getApiRoutes = (data?: object | string) => {
   return http.request<ResultDetail>("post", "/api/apiInfo/getApiRoutes", {
+    data
+  });
+};
+
+/** 获取api列表 */
+export const getApiRoutesModel = (data?: object | string) => {
+  return http.request<ResultDetail>("post", "/api/apiInfo/getApiRoutesModel", {
     data
   });
 };

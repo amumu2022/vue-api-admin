@@ -61,6 +61,7 @@
     "element-plus": "^2.9.0",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
+    "md-editor-v3": "^5.4.5",
     "mitt": "^3.0.1",
     "monaco-editor": "^0.52.2",
     "nprogress": "^0.2.0",
