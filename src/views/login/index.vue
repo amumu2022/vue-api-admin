@@ -35,7 +35,6 @@ defineOptions({
   name: "Login"
 });
 
-const imgCode = ref("");
 const loginDay = ref(7);
 const router = useRouter();
 const loading = ref(false);

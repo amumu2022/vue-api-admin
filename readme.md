@@ -1,10 +1,11 @@
-<p align="center">
-  <a href="https://github.com/amumu2022/vue-api-admin">
-    <img alt="Vue FastAPI Admin Logo" width="200" src="./docs/image/logo.png">
-  </a>
-</p>
+<div align="center">
 
-<h1 align="center">晚风API 后台管理系统</h1>
+# 晚风API 后台管理系统
+
+![晚风API](https://socialify.git.ci/amumu2022/vue-api-admin/image?font=Jost&logo=https%3A%2F%2Fgitee.com%2Fxdteam-mumu%2Fvue-api-admin%2Fraw%2Fmaster%2Fdocs%2Fimage%2Flogo.png&name=1&owner=1&pattern=Diagonal+Stripes&stargazers=1&theme=Auto)
+
+</div>
+
 
 
 基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置110+条api接口。
@@ -15,8 +16,6 @@
 - **JWT鉴权**：使用 JSON Web Token（JWT）进行身份验证和授权，增强应用的安全性。
 - **颗粒度权限管理**：可实现api的免费和收费功能切换，实现按需付费。
 - **免费和收费功能切换**：系统支持细粒度的权限管理,可以针对不同用户设置不同的访问权限。
-- **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
-
 - **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
 
 
@@ -166,6 +165,8 @@ password：123456
 你可以在群里提出任何疑问，我会尽快回复答疑。
 
 [![群聊](./docs/image/group.png)](https://qm.qq.com/q/lebtXGD6qk)
+
+
 ### Visitors Count
 
 <img align="left" src = "https://profile-counter.glitch.me/vue-api-admin/count.svg" alt="Loading">
