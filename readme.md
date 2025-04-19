@@ -2,7 +2,13 @@
 
 # 晚风API 后台管理系统
 
-![晚风API](https://socialify.git.ci/amumu2022/vue-api-admin/image?font=Jost&logo=https%3A%2F%2Fgitee.com%2Fxdteam-mumu%2Fvue-api-admin%2Fraw%2Fmaster%2Fdocs%2Fimage%2Flogo.png&name=1&owner=1&pattern=Diagonal+Stripes&stargazers=1&theme=Auto)
+![晚风API](https://socialify.git.ci/amumu2022/vue-api-admin/image?font=Jost&description=1&descriptionEditable=%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EPython%E7%9A%84Api%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0&logo=https%3A%2F%2Fgitee.com%2Fxdteam-mumu%2Fvue-api-admin%2Fraw%2Fmaster%2Fdocs%2Fimage%2Flogo.png&name=1&owner=1&forks=1&issues=1&pulls=1&pattern=Diagonal+Stripes&stargazers=1&theme=Auto)
+
+![Python](https://img.shields.io/badge/Python->=3.10-red)
+![Node](https://img.shields.io/badge/Node->=V22.14.0-green)
+![Vue](https://img.shields.io/badge/Vue-v3.5.13-pink)
+![Element](https://img.shields.io/badge/Element-Plus-blue)
+[![QQ](https://img.shields.io/badge/Chat-QQ-91A1E7)](https://qm.qq.com/q/lebtXGD6qk)
 
 </div>
 
