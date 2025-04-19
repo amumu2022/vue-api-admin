@@ -4,7 +4,7 @@ import "vue-json-pretty/lib/styles.css";
 import type { ApiGroup, ApiItem } from "./types";
 import { sendApiRequest, convertOpenApiToTree } from "./api";
 import { getApiRoutesModel } from "@/api/apiCtrl/ApiManagement";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { MdEditor } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { storageLocal } from "@pureadmin/utils";
@@ -30,6 +30,32 @@ const paramsData = ref({});
 const bodyData = ref({});
 const responseData = ref("");
 const loading = ref(true);
+
+const paramState = reactive({
+  val: JSON.stringify(paramsData),
+  data: paramsData,
+  showLine: true,
+  showLineNumber: true,
+  showDoubleQuotes: true,
+  showLength: true,
+  editable: true,
+  showIcon: true,
+  editableTrigger: "click",
+  deep: 0
+});
+
+const bodyState = reactive({
+  val: JSON.stringify(bodyData),
+  data: bodyData,
+  showLine: true,
+  showLineNumber: true,
+  showDoubleQuotes: true,
+  showLength: true,
+  editable: true,
+  showIcon: true,
+  editableTrigger: "click",
+  deep: 0
+});
 
 async function onSearch() {
   loading.value = true;
@@ -167,51 +193,32 @@ const handleSendRequest = async (item: ApiItem) => {
         </div>
       </div>
 
-      <!-- <div v-show="activeApi" class="right-panel">
-      <div class="api-info">
-        <div class="info-row">
-          <span class="label">功能描述:</span>
-          <span class="value">{{ activeApi?.summary }}</span>
-        </div>
-        <div class="info-row">
-          <span class="label">API路径:</span>
-          <span class="value">{{ activeApi?.path }}</span>
-          <el-button type="primary" @click="handleSendRequest(activeApi)">
-            发送请求
-          </el-button>
-        </div>
-        <div class="info-row" style="gap: 15px">
-          <el-input
-            v-model="baseUrl"
-            placeholder="请求基础地址"
-            style="flex: 2"
-          />
-          <el-input v-model="token" placeholder="Token" style="flex: 1" />
-        </div>
-      </div> -->
-
       <el-tabs type="">
         <el-tab-pane label="请求参数">
           <vue-json-pretty
-            :data="paramsData"
-            :deep="3"
-            :show-line="true"
-            :show-line-number="true"
-            :show-double-quotes="true"
-            :show-length="true"
-            :editable="true"
+            v-model:data="paramsData"
+            :deep="paramState.deep"
+            :show-double-quotes="paramState.showDoubleQuotes"
+            :show-line="paramState.showLine"
+            :show-length="paramState.showLength"
+            :show-icon="paramState.showIcon"
+            :show-line-number="paramState.showLineNumber"
+            :editable="paramState.editable"
+            :editable-trigger="paramState.editableTrigger as any"
           />
         </el-tab-pane>
 
         <el-tab-pane label="请求体">
           <vue-json-pretty
-            :data="bodyData"
-            :deep="3"
-            :show-line="true"
-            :show-line-number="true"
-            :show-double-quotes="true"
-            :show-length="true"
-            :editable="true"
+            v-model:data="bodyData"
+            :deep="bodyState.deep"
+            :show-double-quotes="bodyState.showDoubleQuotes"
+            :show-line="bodyState.showLine"
+            :show-length="bodyState.showLength"
+            :show-icon="bodyState.showIcon"
+            :show-line-number="bodyState.showLineNumber"
+            :editable="bodyState.editable"
+            :editable-trigger="bodyState.editableTrigger as any"
           />
         </el-tab-pane>
       </el-tabs>
@@ -220,8 +227,9 @@ const handleSendRequest = async (item: ApiItem) => {
         <h3>响应结果</h3>
         <md-editor
           v-model="responseData"
-          :preview-only="true"
-          :toolbars="[]"
+          :preview="true"
+          :showCodeArea="false"
+          :toolbars="['pageFullscreen', 'previewOnly']"
           :style="{
             height: responseData
               ? `${Math.min(Math.max(250, responseData.split('\n').length * 20), 600)}px`
