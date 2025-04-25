@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useNav } from "@/layout/hooks/useNav";
 import LaySearch from "../lay-search/index.vue";
+import LayUpdate from "../lay-update/index.vue";
 import LayNotice from "../lay-notice/index.vue";
 import LayNavMix from "../lay-sidebar/NavMix.vue";
 import LaySidebarFullScreen from "../lay-sidebar/components/SidebarFullScreen.vue";
@@ -42,6 +43,8 @@ const {
     <div v-if="layout === 'vertical'" class="vertical-header-right">
       <!-- 菜单搜索 -->
       <LaySearch id="header-search" />
+      <!-- 更新 -->
+      <LayUpdate id="header-update" />
       <!-- 全屏 -->
       <LaySidebarFullScreen id="full-screen" />
       <!-- 消息通知 -->

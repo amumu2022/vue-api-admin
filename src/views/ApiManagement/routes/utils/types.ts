@@ -13,6 +13,7 @@ interface FormItemProps {
   points: number; // 权限点
   today_call?: number; // 今日调用
   total_call?: number; // 累计调用
+  qps?: number; // QPS
   category?: string; // API分类
   daily_call_limit?: number; // 每日调用限制
   total_call_limit?: number; // 总调用限制

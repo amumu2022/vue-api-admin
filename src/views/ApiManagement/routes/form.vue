@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<FormProps>(), {
     points: 0,
     today_call: 0,
     total_call: 0,
+    qps: 0,
     category: "",
     daily_call_limit: 0,
     total_call_limit: 0,
@@ -99,6 +100,16 @@ defineExpose({ getRef });
             v-model="newFormInline.points"
             clearable
             placeholder="请输入权限点"
+          />
+        </el-form-item>
+      </re-col>
+
+      <re-col :value="12" :xs="24" :sm="24">
+        <el-form-item label="QPS" prop="qps">
+          <el-input-number
+            v-model="newFormInline.qps"
+            clearable
+            placeholder="请设置QPS"
           />
         </el-form-item>
       </re-col>

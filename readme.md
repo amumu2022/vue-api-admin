@@ -12,8 +12,6 @@
 
 </div>
 
-
-
 基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置110+条api接口。
 
 ### 特性
@@ -23,7 +21,7 @@
 - **颗粒度权限管理**：可实现api的免费和收费功能切换，实现按需付费。
 - **免费和收费功能切换**：系统支持细粒度的权限管理,可以针对不同用户设置不同的访问权限。
 - **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
-
+- **自定义QPS限制**：可以对每条API进行QPS限制。
 
 ### 在线预览
 
@@ -33,56 +31,55 @@
 
 ### 登录页
 
-![image](./docs/image/登录页.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/登录页.png)
 
 ### 注册页
 
-![image](./docs/image/注册页.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/注册页.png)
 
 ### 自助查询
 
-![image](./docs/image/point查询.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/point查询.png)
 
 ### token重置
 
-![image](./docs/image/token重置.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/token重置.png)
 
 ### 工作台
 
-![image](./docs/image/首页.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/首页.png)
 
 ### 用户管理
 
-![image](./docs/image/用户管理.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/用户管理.png)
 
 ### 角色管理
 
-![image](./docs/image/角色管理.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/角色管理.png)
 
 ### 接口监控
 
-![image](./docs/image/接口监控.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口监控.png)
 
 ### 登录日志
 
-![image](./docs/image/登录日志.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/登录日志.png)
 
 ### 黑名单管理
 
-![image](./docs/image/黑名单管理.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/黑名单管理.png)
 
 ### 路径详细
 
-![image](./docs/image/路径详细.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/路径详细.png)
 
 ### 接口请求
 
-![image](./docs/image/接口请求.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口请求.png)
 
 ### 平台对接
 
-![image](./docs/image/平台对接.png)
-
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
 
 ### 本地启动
 
@@ -116,12 +113,17 @@ source .myapi/bin/activate  # Linux/Mac
 poetry install
 ```
 
-4. 启动服务
+4. 初始化数据
+
+```sh
+python cli/init.py
+```
+
+5. 启动服务
 
 ```sh
 python app.py
 ```
-
 
 服务现在应该正在运行，访问 <http://localhost:8633/docs> 查看API文档
 
@@ -170,8 +172,9 @@ password：123456
 
 你可以在群里提出任何疑问，我会尽快回复答疑。
 
-[![群聊](./docs/image/group.png)](https://qm.qq.com/q/lebtXGD6qk)
+### 鸣谢
 
+· [vue-pure-admin](https://github.com/pure-admin/vue-pure-admin) 提供美观功能齐全的VUE开发模板
 
 ### Visitors Count
 

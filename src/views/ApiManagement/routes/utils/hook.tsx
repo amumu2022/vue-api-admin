@@ -158,7 +158,15 @@ export function useDept() {
     {
       label: "消耗点数",
       prop: "points",
-      minWidth: 80
+      minWidth: 60
+    },
+    {
+      label: "QPS设置",
+      prop: "qps",
+      minWidth: 60,
+      cellRenderer: ({ row }) => {
+        return row.path ? (row.qps ?? 2) : "";
+      }
     },
     {
       label: "操作",
@@ -173,7 +181,7 @@ export function useDept() {
               circle
               type="primary"
               icon={useRenderIcon(EditPen)}
-              onClick={() => openDialog("修改", row)}
+              onClick={() => openDialog("编辑", row)}
             ></el-button>
           </div>
         ) : (
@@ -262,6 +270,7 @@ export function useDept() {
           methods: row?.methods ?? [],
           points: row?.points ?? 0,
           category: row?.category ?? "",
+          qps: row?.qps ?? 0,
           daily_call_limit: row?.daily_call_limit ?? 0,
           total_call_limit: row?.total_call_limit ?? 0,
           free: row?.free ?? true,
