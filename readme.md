@@ -12,22 +12,26 @@
 
 </div>
 
-基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置110+条api接口。
+
+基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置130+条api接口。
 
 ### 特性
 
-- **最流行技术栈**：基于 Python 3.11 和 FastAPI 高性能异步框架，结合 Vue3 和 Vite 等前沿技术进行开发。
-- **JWT鉴权**：使用 JSON Web Token（JWT）进行身份验证和授权，增强应用的安全性。
-- **颗粒度权限管理**：可实现api的免费和收费功能切换，实现按需付费。
-- **免费和收费功能切换**：系统支持细粒度的权限管理,可以针对不同用户设置不同的访问权限。
+- **最流行技术栈**：基于 Python 3.10 和 FastAPI 高性能异步框架，结合 Vue3 和 Vite 等前沿技术进行开发。
+- **系统JWT鉴权**：使用 JSON Web Token（JWT）进行身份验证和授权，增强应用的安全性。
+- **颗粒度权限管理**：系统支持细粒度的权限管理,可以针对不同用户设置不同的访问权限。
+- **接口鉴权**：使用token作为密钥，绑定用户信息，无token无法使用。
+- **免费和收费功能切换**：可实现api的免费和收费功能切换，实现按需付费。
 - **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
 - **自定义QPS限制**：可以对每条API进行QPS限制。
 
+
 ### 在线预览
 
-- <https://amumu2022.github.io/vue-api-admin/>
-- username: admin
-- password: 123456
+ - API文档： <https://wanfeng-api.apifox.cn/>
+ - 官网： <http://api.levial.dpdns.org/>
+ - 服务地址： <http://http://api.levial.dpdns.org/api/v1/>
+
 
 ### 登录页
 
@@ -81,6 +85,7 @@
 
 ![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
 
+
 ### 本地启动
 
 #### 后端
@@ -111,7 +116,7 @@ source .myapi/bin/activate  # Linux/Mac
 
 ```sh
 poetry install
-```
+``` 
 
 4. 初始化数据
 
@@ -119,11 +124,13 @@ poetry install
 python cli/init.py
 ```
 
+
 5. 启动服务
 
 ```sh
 python app.py
 ```
+
 
 服务现在应该正在运行，访问 <http://localhost:8633/docs> 查看API文档
 
@@ -170,7 +177,7 @@ password：123456
 
 进群的条件是给项目一个star，小小的star是作者维护下去的动力。
 
-你可以在群里提出任何疑问，我会尽快回复答疑。
+你可以在群里提出任何疑问，我会尽快回复答疑。[![QQ](https://img.shields.io/badge/Chat-QQ-91A1E7)](https://qm.qq.com/q/lebtXGD6qk)
 
 ### 鸣谢
 
