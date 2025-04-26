@@ -8,6 +8,14 @@ import Smile from "@iconify-icons/ri/star-smile-line";
 
 // 修改接口定义,添加top_10_apis的具体类型
 interface ApiStatisticsResponse {
+  total_users: number;
+  user_seven_days_data: {
+    new_users: number[];
+    total_users: number[];
+    dates: string[];
+  };
+  user_growth: number;
+
   total_apis: number;
   total_calls: number;
   today_calls: number;
@@ -24,6 +32,7 @@ const weekdays = ["周日", "周一", "周二", "周三", "周四", "周五", "�
 export function useApiData() {
   const loading = ref(true);
   const today_calls = ref([]);
+  const total_users = ref([]);
   const total_calls = ref([]);
   const dataList = ref<ApiStatisticsResponse | null>(null);
 
@@ -36,6 +45,9 @@ export function useApiData() {
         0, 0, 0, 0, 0, 0, 0
       ];
       total_calls.value = dataList.value?.seven_days_data.total_calls || [
+        0, 0, 0, 0, 0, 0, 0
+      ];
+      total_users.value = dataList.value?.user_seven_days_data.total_users || [
         0, 0, 0, 0, 0, 0, 0
       ];
     } catch (error) {
@@ -83,10 +95,10 @@ export function useApiData() {
       bgColor: "#f6f4fe",
       color: "#7846e5",
       duration: 100,
-      name: "用户满意度",
-      value: 100,
-      percent: "+100%",
-      data: [100]
+      name: "用户总数",
+      value: dataList.value?.total_users || 0,
+      percent: `${dataList.value?.user_growth}%`,
+      data: total_users.value
     }
   ]);
 
