@@ -1,9 +1,9 @@
 /*
  * @Author: XDTEAM
- * @Date: 2025-03-18 19:02:18
- * @LastEditTime: 2025-03-22 21:55:08
+ * @Date: 2025-05-01 12:31:39
+ * @LastEditTime: 2025-05-01 13:33:28
  * @LastEditors: XDTEAM
- * @Description:
+ * @Description: 
  */
 import { defineStore } from "pinia";
 import {
@@ -23,8 +23,7 @@ import {
 import { useMultiTagsStoreHook } from "./multiTags";
 import { type DataInfo, setToken, removeToken, userKey } from "@/utils/auth";
 
-export const useUserStore = defineStore({
-  id: "pure-user",
+export const useUserStore = defineStore("pure-user", {
   state: (): userType => ({
     // 头像
     avatar: storageLocal().getItem<DataInfo<number>>(userKey)?.avatar ?? "",

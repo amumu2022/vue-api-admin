@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import DownloadIcon from "@iconify-icons/ep/download";
-import UpdateIcon from "@iconify-icons/ep/refresh";
-import ReloadIcon from "@iconify-icons/ep/refresh-right";
+import DownloadIcon from "~icons/ep/download";
+import UpdateIcon from "~icons/ep/refresh";
+import ReloadIcon from "~icons/ep/refresh-right";
 import { ElMessage, ElMessageBox } from "element-plus";
 // 定义数据
 const backendSourceType = ref("official");

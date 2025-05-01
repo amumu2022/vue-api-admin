@@ -1,3 +1,10 @@
+<!--
+ * @Author: XDTEAM
+ * @Date: 2025-05-01 12:31:39
+ * @LastEditTime: 2025-05-01 12:50:06
+ * @LastEditors: XDTEAM
+ * @Description: 
+-->
 <script setup lang="ts">
 import { initRouter } from "@/router/utils";
 import { storageLocal } from "@pureadmin/utils";
@@ -44,7 +51,7 @@ function onChange() {
 
 <template>
   <div>
-    <p class="mb-2">
+    <p class="mb-2!">
       模拟后台根据不同角色返回对应路由，观察左侧菜单变化（管理员角色可查看系统管理菜单、普通角色不可查看系统管理菜单）
     </p>
     <el-card shadow="never" :style="elStyle">
@@ -53,7 +60,7 @@ function onChange() {
           <span>当前角色：{{ username }}</span>
         </div>
       </template>
-      <el-select v-model="username" class="!w-[160px]" @change="onChange">
+      <el-select v-model="username" class="w-[160px]!" @change="onChange">
         <el-option
           v-for="item in options"
           :key="item.value"

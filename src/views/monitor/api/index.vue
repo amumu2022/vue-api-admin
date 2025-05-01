@@ -2,8 +2,8 @@
 import { useRole } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import fold_down from "@iconify-icons/ep/caret-bottom";
-import fold_up from "@iconify-icons/ep/caret-top";
+import fold_down from "~icons/ep/caret-bottom";
+import fold_up from "~icons/ep/caret-top";
 import { ref, onMounted } from "vue";
 onMounted(() => {
   searchStatus.value = !isMobile.value;
@@ -12,10 +12,10 @@ function changeStatus() {
   searchStatus.value = !searchStatus.value;
 }
 const searchStatus = ref(false);
-import Delete from "@iconify-icons/ep/delete";
-import Search from "@iconify-icons/ep/search";
-import Refresh from "@iconify-icons/ep/refresh";
-import View from "@iconify-icons/ep/view";
+import Delete from "~icons/ep/delete";
+import Search from "~icons/ep/search";
+import Refresh from "~icons/ep/refresh";
+import View from "~icons/ep/view";
 
 const statusTypes = [
   { value: 0, text: "失败" },

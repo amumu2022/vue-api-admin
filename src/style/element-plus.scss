@@ -16,7 +16,7 @@
 }
 
 /* 重置 el-button 中 icon 的 margin */
-.reset-margin [class*="el-icon"] + span {
+.reset-margin [class*="el-icon"]+span {
   margin-left: 2px !important;
 }
 
@@ -75,6 +75,7 @@
 }
 
 .el-icon {
+
   &.el-tour__close,
   &.el-dialog__close,
   &.el-drawer__close,
@@ -83,8 +84,8 @@
   .el-upload-list__item.is-ready &.el-icon--close {
     width: 24px;
     height: 24px;
-    border-radius: 4px;
     outline: none;
+    border-radius: 4px;
     transition:
       background-color 0.2s,
       color 0.2s;
@@ -117,8 +118,8 @@
   }
 
   & .el-message__closeBtn {
-    border-radius: 4px;
     outline: none;
+    border-radius: 4px;
     transition:
       background-color 0.2s,
       color 0.2s;
@@ -131,13 +132,13 @@
 
 /* 自定义菜单搜索样式 */
 .pure-search-dialog {
-  @media screen and (width > 760px) and (width <= 940px) {
+  @media screen and (width > 760px) and (width <=940px) {
     .el-input__inner {
       font-size: 12px;
     }
   }
 
-  @media screen and (width <= 470px) {
+  @media screen and (width <=470px) {
     .el-input__inner {
       font-size: 12px;
     }
@@ -163,17 +164,22 @@
 
 /* 仿 el-scrollbar 滚动条样式，支持大多数浏览器，如Chrome、Edge、Firefox、Safari等。整体暗色风格在 src/style/dark.scss 文件进行了适配 */
 .pure-scrollbar {
-  scrollbar-color: rgb(221 222 224) transparent; /* 滑块颜色、轨道颜色 */
+  scrollbar-color: rgb(221 222 224) transparent;
+  /* 滑块颜色、轨道颜色 */
 
   /* Firefox */
-  scrollbar-width: thin; /* 可选值为 'auto', 'thin', 'none' */
+  scrollbar-width: thin;
+
+  /* 可选值为 'auto', 'thin', 'none' */
   ::-webkit-scrollbar {
-    width: 6px; /* 滚动条宽度 */
+    width: 6px;
+    /* 滚动条宽度 */
   }
 
   /* 滚动条轨道 */
   ::-webkit-scrollbar-track {
-    background: transparent; /* 轨道颜色 */
+    background: transparent;
+    /* 轨道颜色 */
   }
 
   /* 滚动条滑块 */
@@ -184,6 +190,7 @@
 
   /* 滚动条滑块：hover状态 */
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(199 201 203); /* 滑块hover颜色 */
+    background: rgb(199 201 203);
+    /* 滑块hover颜色 */
   }
 }

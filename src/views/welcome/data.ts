@@ -1,10 +1,10 @@
 import { ref, computed } from "vue";
 import { dayjs, cloneDeep, getRandomIntBetween } from "./utils";
 import { getApiCalls } from "@/api/apiCtrl/ApiManagement";
-import GroupLine from "@iconify-icons/ri/group-line";
-import Question from "@iconify-icons/ri/question-answer-line";
-import CheckLine from "@iconify-icons/ri/chat-check-line";
-import Smile from "@iconify-icons/ri/star-smile-line";
+import GroupLine from "~icons/ri/group-line";
+import Question from "~icons/ri/question-answer-line";
+import CheckLine from "~icons/ri/chat-check-line";
+import Smile from "~icons/ri/star-smile-line";
 
 // 修改接口定义,添加top_10_apis的具体类型
 interface ApiStatisticsResponse {

@@ -2,13 +2,13 @@
 import { useRole } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Delete from "@iconify-icons/ep/delete";
-import Search from "@iconify-icons/ep/search";
-import Refresh from "@iconify-icons/ep/refresh";
-import View from "@iconify-icons/ep/view";
-import fold_down from "@iconify-icons/ep/caret-bottom";
-import fold_up from "@iconify-icons/ep/caret-top";
-import AddFill from "@iconify-icons/ri/add-circle-line";
+import Delete from "~icons/ep/delete";
+import Search from "~icons/ep/search";
+import Refresh from "~icons/ep/refresh";
+import View from "~icons/ep/view";
+import fold_down from "~icons/ep/caret-bottom";
+import fold_up from "~icons/ep/caret-top";
+import AddFill from "~icons/ri/add-circle-line";
 
 import { ref, onMounted } from "vue";
 onMounted(() => {

@@ -1,3 +1,10 @@
+/*
+ * @Author: XDTEAM
+ * @Date: 2025-05-01 12:31:39
+ * @LastEditTime: 2025-05-01 13:57:28
+ * @LastEditors: XDTEAM
+ * @Description: 
+ */
 import App from "./App.vue";
 import router from "./router";
 import { setupStore } from "@/store";

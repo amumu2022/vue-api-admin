@@ -7,7 +7,7 @@ import serviceIcon from "@/assets/svg/service.svg?component";
 import calendarIcon from "@/assets/svg/calendar.svg?component";
 import userAvatarIcon from "@/assets/svg/user_avatar.svg?component";
 
-import More2Fill from "@iconify-icons/ri/more-2-fill";
+import More2Fill from "~icons/ri/more-2-fill";
 
 defineOptions({
   name: "ReCard"

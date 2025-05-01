@@ -1,3 +1,10 @@
+/*
+ * @Author: XDTEAM
+ * @Date: 2025-05-01 12:31:39
+ * @LastEditTime: 2025-05-01 12:59:39
+ * @LastEditors: XDTEAM
+ * @Description: 
+ */
 import {
   type RouterHistory,
   type RouteRecordRaw,
@@ -172,6 +179,8 @@ function handleAsyncRoutes(routeList) {
           const flattenRouters: any = router
             .getRoutes()
             .find(n => n.path === "/");
+          // 保持router.options.routes[0].children与path为"/"的children一致，防止数据不一致导致异常
+          flattenRouters.children = router.options.routes[0].children;
           router.addRoute(flattenRouters);
         }
       }
@@ -203,7 +212,6 @@ function initRouter() {
     } else {
       return new Promise(resolve => {
         getAsyncRoutes().then(({ data }) => {
-          console.log("异步路由", data);
           handleAsyncRoutes(cloneDeep(data));
           storageLocal().setItem(key, data);
           resolve(router);

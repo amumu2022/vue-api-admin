@@ -4,17 +4,17 @@ import { useUser } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
-import Role from "@iconify-icons/ri/admin-line";
-import Password from "@iconify-icons/ri/lock-password-line";
-import More from "@iconify-icons/ep/more-filled";
-import Delete from "@iconify-icons/ep/delete";
-import EditPen from "@iconify-icons/ep/edit-pen";
-import Search from "@iconify-icons/ep/search";
-import Refresh from "@iconify-icons/ep/refresh";
-import AddFill from "@iconify-icons/ri/add-circle-line";
+import Role from "~icons/ri/admin-line";
+import Password from "~icons/ri/lock-password-line";
+import More from "~icons/ep/more-filled";
+import Delete from "~icons/ep/delete";
+import EditPen from "~icons/ep/edit-pen";
+import Search from "~icons/ep/search";
+import Refresh from "~icons/ep/refresh";
+import AddFill from "~icons/ri/add-circle-line";
 
-import fold_down from "@iconify-icons/ep/caret-bottom";
-import fold_up from "@iconify-icons/ep/caret-top";
+import fold_down from "~icons/ep/caret-bottom";
+import fold_up from "~icons/ep/caret-top";
 
 defineOptions({
   name: "memberShipUser"

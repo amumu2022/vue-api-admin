@@ -1,8 +1,8 @@
 import { delay } from "@pureadmin/utils";
 import { ref, onMounted, reactive, watch } from "vue";
 import type { PaginationProps } from "@pureadmin/table";
-import ThumbUp from "@iconify-icons/ri/thumb-up-line";
-import Hearts from "@iconify-icons/ri/hearts-line";
+import ThumbUp from "~icons/ri/thumb-up-line";
+import Hearts from "~icons/ri/hearts-line";
 import Empty from "./empty.svg?component";
 import dayjs from "dayjs";
 

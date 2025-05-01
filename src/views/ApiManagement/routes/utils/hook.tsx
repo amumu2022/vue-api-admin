@@ -13,7 +13,7 @@ import { reactive, ref, onMounted, h, toRaw } from "vue";
 import { useBasicLayout } from "@/hooks/useBasicLayout";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
-import EditPen from "@iconify-icons/ep/edit-pen";
+import EditPen from "~icons/ep/edit-pen";
 
 const { isMobile } = useBasicLayout();
 

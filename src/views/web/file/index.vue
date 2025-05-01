@@ -2,13 +2,13 @@
 import { useRole } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Delete from "@iconify-icons/ep/delete";
-import AddFile from "@iconify-icons/ep/document-add";
-import AddFold from "@iconify-icons/ri/folder-add-fill";
-import Open from "@iconify-icons/ri/book-open-fill";
-import Copy from "@iconify-icons/ri/file-copy-2-fill";
-import Back from "@iconify-icons/ri/arrow-go-back-fill";
-import ArrowDown from "@iconify-icons/ep/caret-bottom";
+import Delete from "~icons/ep/delete";
+import AddFile from "~icons/ep/document-add";
+import AddFold from "~icons/ri/folder-add-fill";
+import Open from "~icons/ri/book-open-fill";
+import Copy from "~icons/ri/file-copy-2-fill";
+import Back from "~icons/ri/arrow-go-back-fill";
+import ArrowDown from "~icons/ep/caret-bottom";
 defineOptions({
   name: "WebFile"
 });

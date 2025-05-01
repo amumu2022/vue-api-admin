@@ -6,8 +6,8 @@ import { userInfo } from "@/api/apiCtrl/memberShip";
 import { message } from "@/utils/message";
 import { useUserStoreHook } from "@/store/modules/user";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
-import Lock from "@iconify-icons/ri/lock-fill";
-import email from "@iconify-icons/ep/iphone";
+import Lock from "~icons/ri/lock-fill";
+import email from "~icons/ep/iphone";
 import type { FormInstance } from "element-plus";
 import { updateRules } from "../utils/rule";
 

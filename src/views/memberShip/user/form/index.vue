@@ -13,7 +13,7 @@ import { FormProps } from "../utils/types";
 import { usePublicHooks } from "../../hooks";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
-import Refresh from "@iconify-icons/ep/refresh";
+import Refresh from "~icons/ep/refresh";
 
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({

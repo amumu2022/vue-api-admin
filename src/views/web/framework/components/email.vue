@@ -6,8 +6,8 @@ import { message } from "@/utils/message";
 import { ref, onBeforeMount } from "vue";
 import { getDockData, UpdateDock } from "@/api/system/dock";
 import { ApiSendEmail } from "@/api/system/api";
-import orange from "@iconify-icons/ep/orange";
-import Save from "@iconify-icons/ri/save-3-fill";
+import orange from "~icons/ep/orange";
+import Save from "~icons/ri/save-3-fill";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 const activeName = ref("1");
 const EmailOptions = [
