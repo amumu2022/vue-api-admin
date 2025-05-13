@@ -1,1 +1,0 @@
-import{n as r,c as a,o,e as t}from"./index-8XCx_O0E.js";const n={viewBox:"0 0 24 24",width:"1em",height:"1em"};function s(l,e){return o(),a("svg",n,e[0]||(e[0]=[t("path",{fill:"currentColor",d:"M20 22H4v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5zm-8-9a6 6 0 1 1 0-12a6 6 0 0 1 0 12"},null,-1)]))}const c=r({name:"ri-user-3-fill",render:s});export{c as U};
