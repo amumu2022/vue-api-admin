@@ -1,7 +1,7 @@
 <!--
  * @Author: XDTEAM
  * @Date: 2025-04-09 23:47:32
- * @LastEditTime: 2025-04-10 20:40:43
+ * @LastEditTime: 2025-05-13 21:12:04
  * @LastEditors: XDTEAM
  * @Description: 用户信息弹窗
 -->
@@ -14,7 +14,6 @@ const { clipboardValue, copied } = useCopyToClipboard();
 const props = defineProps({
   userData: {
     type: Object,
-    required: true,
     default: () => ({
       username: "",
       email: "",
