@@ -7,7 +7,7 @@ import type { FormItemProps } from "./types";
 
 import { ref, h, toRaw, reactive, onMounted } from "vue";
 import { addDialog } from "@/components/ReDialog";
-import { useBasicLayout } from "@/hooks/useBasicLayout";
+import { deviceDetection } from "@pureadmin/utils";
 import { useCopyToClipboard } from "@pureadmin/utils";
 import { usePublicHooks } from "../../hooks";
 import { ElMessageBox } from "element-plus";

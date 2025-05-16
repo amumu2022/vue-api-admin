@@ -85,10 +85,6 @@
 
 ![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
 
-### 终端日志
-
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/终端日志.png)
-
 
 ### 本地启动
 

@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<FormProps>(), {
     redirect: "",
     icon: "",
     code: "",
-    keepAlive: false,
+    keepAlive: true,
     showLink: true,
     showParent: false
   })
@@ -100,28 +100,23 @@ defineExpose({ getRef });
         </el-form-item>
       </re-col>
 
-      <re-col
-        v-if="newFormInline.open_type === 3"
-        :value="12"
-        :xs="24"
-        :sm="24"
-      >
-        <!-- 按钮级别权限设置 -->
-        <el-form-item label="权限标识" prop="code">
-          <el-input
-            v-model="newFormInline.code"
-            clearable
-            placeholder="请输入权限标识"
-          />
-        </el-form-item>
-      </re-col>
-
       <re-col :value="12" :xs="24" :sm="24">
         <el-form-item label="菜单名称" prop="name">
           <el-input
             v-model="newFormInline.name"
             clearable
             placeholder="请输入菜单名称"
+          />
+        </el-form-item>
+      </re-col>
+
+      <re-col :value="12" :xs="24" :sm="24">
+        <!-- 按钮级别权限设置 -->
+        <el-form-item label="权限标识" prop="code">
+          <el-input
+            v-model="newFormInline.code"
+            clearable
+            placeholder="请输入权限标识"
           />
         </el-form-item>
       </re-col>

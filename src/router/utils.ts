@@ -1,9 +1,9 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-05-01 12:31:39
- * @LastEditTime: 2025-05-13 21:06:09
+ * @LastEditTime: 2025-05-01 12:59:39
  * @LastEditors: XDTEAM
- * @Description:
+ * @Description: 
  */
 import {
   type RouterHistory,
@@ -37,8 +37,8 @@ const modulesRoutes = import.meta.glob("/src/views/**/*.{vue,tsx}");
 import { getAsyncRoutes } from "@/api/system/menu";
 
 function handRank(routeInfo: any) {
-  const { name, path, parent_id, meta } = routeInfo;
-  return isAllEmpty(parent_id)
+  const { name, path, parentId, meta } = routeInfo;
+  return isAllEmpty(parentId)
     ? isAllEmpty(meta?.rank) ||
       (meta?.rank === 0 && name !== "Home" && path !== "/")
       ? true

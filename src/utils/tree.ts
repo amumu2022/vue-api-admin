@@ -130,7 +130,7 @@ export const appendFieldByUniqueId = (
  * @description 构造树型结构数据
  * @param data 数据源
  * @param id id字段 默认id
- * @param parent_id 父节点字段，默认parentId
+ * @param parent_id 父节点字段，默认parent_id
  * @param children 子节点字段，默认children
  * @returns 追加字段后的树
  */

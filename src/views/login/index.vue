@@ -47,7 +47,8 @@ const { title } = useNav();
 
 const ruleForm = reactive({
   username: "",
-  password: ""
+  password: "",
+  roleType: "admin" // 默认选择管理员
 });
 
 const onLogin = async (formEl: FormInstance | undefined) => {
@@ -58,7 +59,8 @@ const onLogin = async (formEl: FormInstance | undefined) => {
       useUserStoreHook()
         .loginByUsername({
           username: ruleForm.username,
-          password: ruleForm.password
+          password: ruleForm.password,
+          roleType: ruleForm.roleType
         })
         .then(res => {
           if (res.code === 200) {
@@ -160,6 +162,19 @@ watch(loginDay, value => {
                   placeholder="密码"
                   :prefix-icon="useRenderIcon(Lock)"
                 />
+              </el-form-item>
+            </Motion>
+
+            <Motion :delay="200">
+              <el-form-item>
+                <el-select
+                  v-model="ruleForm.roleType"
+                  class="w-full"
+                  placeholder="请选择身份"
+                >
+                  <el-option label="管理员" value="admin" />
+                  <el-option label="普通用户" value="user" />
+                </el-select>
               </el-form-item>
             </Motion>
 
