@@ -3,11 +3,11 @@ import { message } from "@/utils/message";
 import { getImageList, XFJParse, deleteImage } from "@/api/private/cloudDrive";
 import type { PaginationProps } from "@pureadmin/table";
 import { ref, toRaw, reactive, onMounted } from "vue";
-import { deviceDetection } from "@pureadmin/utils";
+import { useBasicLayout } from "@/hooks/useBasicLayout";
 import { useCopyToClipboard } from "@pureadmin/utils";
 
 const { clipboardValue, copied } = useCopyToClipboard();
-const isMobile = ref(deviceDetection());
+const { isMobile } = useBasicLayout();
 
 const copyString = string => {
   clipboardValue.value = string;
@@ -24,7 +24,6 @@ export function useRole() {
     currentPage: 1,
     pageSize: 10
   });
-  const formRef = ref();
   const dataList = ref([]);
   const loading = ref(true);
   const imageUrl = ref(""); // 存储当前预览的图片URL
@@ -44,7 +43,7 @@ export function useRole() {
   const previewVisible = ref(false);
   const previewUrl = ref("");
 
-  const handlePreview = async (row) => {
+  const handlePreview = async row => {
     loading.value = true;
     try {
       const ImageInfo = await XFJParse({
@@ -54,7 +53,7 @@ export function useRole() {
       if (!ImageInfo.success) {
         message(`解析失败: ${ImageInfo.message}`, { type: "error" });
         return;
-      } 
+      }
       imageUrl.value = ImageInfo.data.link;
     } catch (error) {
       message(`解析失败: ${error.message}`, { type: "error" });
@@ -81,13 +80,17 @@ export function useRole() {
     },
     {
       label: "图片",
-      prop: "image", 
+      prop: "image",
       minWidth: 120,
       cellRenderer: ({ row }) => (
         <div style="cursor: pointer;">
-          <el-image 
+          <el-image
             style="width: 50px; height: 50px"
-            src= {row.fileIcon ? row?.fileIcon : "https://fakeimg.pl/50x50/?retina=1&text=%E9%A2%84%E8%A7%88&font=noto"}
+            src={
+              row.fileIcon
+                ? row?.fileIcon
+                : "https://fakeimg.pl/50x50/?retina=1&text=%E9%A2%84%E8%A7%88&font=noto"
+            }
             fit="cover"
             preview-teleported
             preview-src-list={imageUrl.value ? [imageUrl.value] : []}
@@ -100,7 +103,7 @@ export function useRole() {
     },
     {
       label: "图片类型",
-      prop: "typeData", 
+      prop: "typeData",
       minWidth: 120,
       cellRenderer: ({ row }) => (
         <el-tag type="success">
@@ -113,15 +116,21 @@ export function useRole() {
       prop: "file_size",
       minWidth: 100,
       formatter: ({ file_size }) => {
-        return (file_size).toFixed(2) + ' KB'
+        return file_size.toFixed(2) + " KB";
       }
     },
     {
-      label: "图片地址", 
+      label: "图片地址",
       prop: "image_url",
       minWidth: 120,
       cellRenderer: ({ row }) => (
-        <el-button type="primary" onClick={() => copyString(`${row.image_url}密码:${row.access_password}`)} link>
+        <el-button
+          type="primary"
+          onClick={() =>
+            copyString(`${row.image_url}密码:${row.access_password}`)
+          }
+          link
+        >
           {`点我复制`}
         </el-button>
       )
@@ -136,7 +145,7 @@ export function useRole() {
       minWidth: 180,
       prop: "created_at",
       formatter: ({ created_at }) => {
-        return dayjs(created_at).format("YYYY-MM-DD HH:mm:ss")
+        return dayjs(created_at).format("YYYY-MM-DD HH:mm:ss");
       }
     },
     {
@@ -160,7 +169,7 @@ export function useRole() {
     });
   }
 
-    function handleSizeChange(val: number) {
+  function handleSizeChange(val: number) {
     form.currentPage = 1;
     form.pageSize = val;
     onSearch();

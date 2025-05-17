@@ -14,7 +14,8 @@ const isMobile = ref(deviceDetection());
 export function useRole(tableRef: Ref) {
   const form = reactive({
     username: "",
-    status: "",
+    status: undefined,
+    free: undefined,
     token: "",
     summary: "",
     currentPage: 1,
@@ -104,12 +105,28 @@ export function useRole(tableRef: Ref) {
       }
     },
     {
+      label: "API状态",
+      prop: "free",
+      minWidth: 80,
+      cellRenderer: ({ row, props }) => (
+        <el-tag size={props.size} type={row.free ? "success" : "warning"}>
+          {row.free ? "免费" : "收费"}
+        </el-tag>
+      )
+    },
+    {
+      label: "消耗点数",
+      prop: "points",
+      minWidth: 80,
+      cellRenderer: ({ row }) => <span>{row.free ? 0 : row.points}</span>
+    },
+    {
       label: "IP地址",
       prop: "ip",
       minWidth: 100
     },
     {
-      label: "状态",
+      label: "请求状态",
       prop: "status",
       minWidth: 60,
       cellRenderer: ({ row, props }) => (

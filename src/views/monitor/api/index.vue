@@ -22,6 +22,11 @@ const statusTypes = [
   { value: 1, text: "成功" }
   // 添加更多操作类型...
 ];
+
+const FreeTypes = [
+  { value: true, text: "免费" },
+  { value: false, text: "收费" }
+];
 defineOptions({
   name: "ApiMonitor"
 });
@@ -83,6 +88,22 @@ const {
           class="!w-[120px]"
           @keyup.enter="onSearch()"
         />
+      </el-form-item>
+      <el-form-item label="API状态：" prop="free">
+        <el-select
+          v-model="form.free"
+          placeholder="请选择"
+          clearable
+          class="!w-[100px]"
+          @change="onSearch()"
+        >
+          <el-option
+            v-for="(item, index) in FreeTypes"
+            :key="index"
+            :label="item.text"
+            :value="item.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="响应状态：" prop="status">
         <el-select

@@ -82,8 +82,8 @@ const {
           >上传时间：</label
         >
         <el-date-picker
-          class="!w-[380px]"
           v-model="form.time"
+          class="!w-[380px]"
           type="datetimerange"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
@@ -108,15 +108,8 @@ const {
       </el-form-item>
     </el-form>
 
-    <PureTableBar title="黑名单IP列表" :columns="columns" @refresh="onSearch">
+    <PureTableBar title="图片列表" :columns="columns" @refresh="onSearch">
       <template #buttons>
-        <!-- <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
-          添加IP
-        </el-button> -->
         <el-button
           :icon="
             searchStatus ? useRenderIcon(fold_up) : useRenderIcon(fold_down)
@@ -148,14 +141,6 @@ const {
           @page-current-change="handleCurrentChange"
         >
           <template #operation="{ row }">
-            <!-- <el-button
-              class="reset-margin"
-              circle
-              type="primary"
-              :size="size"
-              :icon="useRenderIcon(View)"
-              @click="openDialog(row)"
-            /> -->
             <el-popconfirm
               :title="`是否确认删除图片编号为${row.id}的这条数据`"
               @confirm="handleDelete(row)"

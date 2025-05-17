@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { ref, markRaw, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import ReCol from "@/components/ReCol";
-import { useDark, randomGradient } from "./utils";
-import WelcomeTable from "./components/table/index.vue";
+import { useDark } from "./utils";
 import { ReNormalCountTo } from "@/components/ReCountTo";
-import { useRenderFlicker } from "@/components/ReFlicker";
 import { ChartBar, ChartLine, ChartRound } from "./components/charts";
-import Segmented, { type OptionsType } from "@/components/ReSegmented";
-import { useApiData, progressData, latestNewsData } from "./data";
+import { useApiData, progressData } from "./data";
 import { getUserApiStats } from "@/api/system/consumer";
 
 defineOptions({
@@ -18,12 +15,8 @@ const { isDark } = useDark();
 const { chartData, onSearch } = useApiData();
 
 const barChartData = ref({
-  FreeData: [],
-  PaidData: [],
-  Days: []
+  chartData: []
 });
-const curWeek = ref(1);
-const optionsBasis: Array<OptionsType> = [{ label: "免费" }, { label: "付费" }];
 
 // 在组件挂载时获取数据
 onMounted(async () => {
@@ -34,11 +27,8 @@ onMounted(async () => {
 async function fetchBarChartData() {
   try {
     const { data } = await getUserApiStats();
-    console.log(data);
     barChartData.value = {
-      FreeData: data.free,
-      PaidData: data.paid,
-      Days: data.dates
+      chartData: data
     };
   } catch (error) {
     console.error("Failed to fetch bar chart data:", error);
@@ -90,12 +80,22 @@ async function fetchBarChartData() {
           </div>
           <div class="flex justify-between items-start mt-3">
             <div class="w-1/2">
-              <ReNormalCountTo
-                :duration="item.duration"
-                :fontSize="'1.6em'"
-                :startVal="100"
-                :endVal="item.value"
-              />
+              <!-- 根据类型判断显示方式 -->
+              <template v-if="Array.isArray(item.value)">
+                <div class="text-[1.2em] mt-6">
+                  <span v-for="(role, index) in item.value" :key="index">
+                    {{ role }}{{ index !== item.value.length - 1 ? "," : "" }}
+                  </span>
+                </div>
+              </template>
+              <template v-else>
+                <ReNormalCountTo
+                  :duration="item.duration"
+                  :fontSize="'1.6em'"
+                  :startVal="100"
+                  :endVal="item.value"
+                />
+              </template>
               <p class="font-medium text-green-500">{{ item.percent }}</p>
             </div>
             <ChartLine
@@ -128,15 +128,10 @@ async function fetchBarChartData() {
       >
         <el-card class="bar-card" shadow="never">
           <div class="flex justify-between">
-            <span class="text-md font-medium">分析概览</span>
-            <Segmented v-model="curWeek" :options="optionsBasis" />
+            <span class="text-md font-medium">请求数据</span>
           </div>
           <div class="flex justify-between items-start mt-3">
-            <ChartBar
-              :FreeData="barChartData.FreeData"
-              :PaidData="barChartData.PaidData"
-              :Days="barChartData.Days"
-            />
+            <ChartBar :chartData="barChartData.chartData" />
           </div>
         </el-card>
       </re-col>
@@ -185,81 +180,6 @@ async function fetchBarChartData() {
               {{ item.week }}
             </span>
           </div>
-        </el-card>
-      </re-col>
-
-      <re-col
-        v-motion
-        class="mb-[18px]"
-        :value="18"
-        :xs="24"
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 560
-          }
-        }"
-      >
-        <el-card shadow="never" class="h-[580px]">
-          <div class="flex justify-between">
-            <span class="text-md font-medium">数据统计</span>
-          </div>
-          <WelcomeTable class="mt-3" />
-        </el-card>
-      </re-col>
-
-      <re-col
-        v-motion
-        class="mb-[18px]"
-        :value="6"
-        :xs="24"
-        :initial="{
-          opacity: 0,
-          y: 100
-        }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          transition: {
-            delay: 640
-          }
-        }"
-      >
-        <el-card shadow="never">
-          <div class="flex justify-between">
-            <span class="text-md font-medium">最新动态</span>
-          </div>
-          <el-scrollbar max-height="504" class="mt-3">
-            <el-timeline>
-              <el-timeline-item
-                v-for="(item, index) in latestNewsData"
-                :key="index"
-                center
-                placement="top"
-                :icon="
-                  markRaw(
-                    useRenderFlicker({
-                      background: randomGradient({
-                        randomizeHue: true
-                      })
-                    })
-                  )
-                "
-                :timestamp="item.date"
-              >
-                <p class="text-text_color_regular text-sm">
-                  {{
-                    `新增 ${item.requiredNumber} 条问题，${item.resolveNumber} 条已解决`
-                  }}
-                </p>
-              </el-timeline-item>
-            </el-timeline>
-          </el-scrollbar>
         </el-card>
       </re-col>
     </el-row>

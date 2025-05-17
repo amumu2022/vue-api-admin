@@ -2,14 +2,11 @@
 import { useDark, useECharts } from "@pureadmin/utils";
 import { type PropType, ref, computed, watch, nextTick } from "vue";
 
-interface ApiStatisticsResponse {
-  free: number[];
-  paid: number[];
-  dates: string[];
+interface DataItem {
+  date: string;
+  count: number;
 }
 
-const loading = ref(false);
-const SevenData = ref<ApiStatisticsResponse | null>(null);
 const { isDark } = useDark();
 const theme = computed(() => (isDark.value ? "dark" : "light"));
 const chartRef = ref();
@@ -18,90 +15,62 @@ const { setOptions } = useECharts(chartRef, {
 });
 
 const props = defineProps({
-  FreeData: {
-    type: Array as PropType<Array<number>>,
-    default: () => []
-  },
-  PaidData: {
-    type: Array as PropType<Array<number>>,
-    default: () => []
-  },
-  Days: {
-    type: Array as PropType<Array<string>>,
+  chartData: {
+    type: Array as PropType<DataItem[]>,
     default: () => []
   }
 });
 
 watch(
-  () => props,
+  () => props.chartData,
   async () => {
-    await nextTick(); // 确保DOM更新完成后再执行
+    await nextTick();
     setOptions({
-      container: ".bar-card",
-      color: ["#41b6ff", "#e85f33"],
       tooltip: {
         trigger: "axis",
         axisPointer: {
-          type: "none"
+          type: "shadow"
         }
       },
       grid: {
-        top: "20px",
-        left: "50px",
-        right: 0
+        left: "3%",
+        right: "4%",
+        bottom: "3%",
+        top: "3%",
+        containLabel: true // 确保坐标轴标签显示完整
       },
-      legend: {
-        data: ["免费", "付费"],
-        textStyle: {
-          color: "#606266",
-          fontSize: "0.875rem"
+      xAxis: {
+        type: "category",
+        data: props.chartData.map(item => item.date),
+        axisLabel: {
+          fontSize: 12,
+          interval: 0,
+          rotate: 45, // 旋转标签以防止重叠
+          formatter: (value: string) => {
+            // 只显示月和日
+            return value.slice(5);
+          }
+        }
+      },
+      yAxis: {
+        type: "value",
+        name: "数量",
+        nameTextStyle: {
+          padding: [0, 0, 0, 40] // 调整名称位置
         },
-        bottom: 0
+        axisLabel: {
+          fontSize: 12
+        }
       },
-      xAxis: [
-        {
-          type: "category",
-          data: props.Days,
-          axisLabel: {
-            fontSize: "0.875rem"
-          },
-          axisPointer: {
-            type: "shadow"
-          }
-        }
-      ],
-      yAxis: [
-        {
-          type: "value",
-          axisLabel: {
-            fontSize: "0.875rem"
-          },
-          splitLine: {
-            show: false // 去网格线
-          }
-          // name: "单位: 个"
-        }
-      ],
       series: [
         {
-          name: "免费",
           type: "bar",
-          barWidth: 10,
+          data: props.chartData.map(item => item.count),
+          barWidth: "40%",
           itemStyle: {
             color: "#41b6ff",
-            borderRadius: [10, 10, 0, 0]
-          },
-          data: props.FreeData
-        },
-        {
-          name: "付费",
-          type: "bar",
-          barWidth: 10,
-          itemStyle: {
-            color: "#e86033ce",
-            borderRadius: [10, 10, 0, 0]
-          },
-          data: props.PaidData
+            borderRadius: [4, 4, 0, 0]
+          }
         }
       ]
     });
