@@ -306,10 +306,7 @@ export function useDept() {
           category: row?.category ?? "",
           qps: row?.qps ?? 0,
           daily_call_limit: row?.daily_call_limit ?? 0,
-          total_call_limit: row?.total_call_limit ?? 0,
-          free: row?.free ?? true,
-          token: row?.token ?? false,
-          enable: row?.enable ?? true
+          total_call_limit: row?.total_call_limit ?? 0
         }
       },
       width: "46%",

@@ -1,7 +1,7 @@
 <!--
  * @Author: XDTEAM
  * @Date: 2025-03-20 21:58:17
- * @LastEditTime: 2025-05-11 16:54:01
+ * @LastEditTime: 2025-05-23 21:53:34
  * @LastEditors: XDTEAM
  * @Description: 
 -->
@@ -11,8 +11,6 @@ import ReCol from "@/components/ReCol";
 import { usePublicHooks } from "../hooks";
 import { formRules } from "./utils/rule";
 import { FormProps } from "./utils/types";
-import Segmented from "@/components/ReSegmented";
-import { StatusOptions, FreeOptions, TokenOptions } from "./utils/enums";
 
 const props = withDefaults(defineProps<FormProps>(), {
   formInline: () => ({
@@ -26,17 +24,14 @@ const props = withDefaults(defineProps<FormProps>(), {
     qps: 0,
     category: "",
     daily_call_limit: 0,
-    total_call_limit: 0,
-    free: true,
-    enable: true,
-    token: false
+    total_call_limit: 0
   })
 });
 
 const ruleFormRef = ref();
 const { switchStyle } = usePublicHooks();
 const newFormInline = ref(props.formInline);
-
+console.log("newFormInline", newFormInline.value);
 function getRef() {
   return ruleFormRef.value;
 }
@@ -133,48 +128,6 @@ defineExpose({ getRef });
             v-model="newFormInline.total_call_limit"
             clearable
             placeholder="请输入总调用限制"
-          />
-        </el-form-item>
-      </re-col>
-
-      <re-col :value="12" :xs="24" :sm="24">
-        <el-form-item label="是否免费">
-          <Segmented
-            :modelValue="newFormInline.free"
-            :options="FreeOptions"
-            @change="
-              ({ option: { value } }) => {
-                newFormInline.free = value;
-              }
-            "
-          />
-        </el-form-item>
-      </re-col>
-
-      <re-col :value="12" :xs="24" :sm="24">
-        <el-form-item label="是否启用">
-          <Segmented
-            :modelValue="newFormInline.enable"
-            :options="StatusOptions"
-            @change="
-              ({ option: { value } }) => {
-                newFormInline.enable = value;
-              }
-            "
-          />
-        </el-form-item>
-      </re-col>
-
-      <re-col :value="12" :xs="24" :sm="24">
-        <el-form-item label="Token">
-          <Segmented
-            :modelValue="newFormInline.token"
-            :options="TokenOptions"
-            @change="
-              ({ option: { value } }) => {
-                newFormInline.token = value;
-              }
-            "
           />
         </el-form-item>
       </re-col>

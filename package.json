@@ -55,6 +55,7 @@
     "@vueuse/motion": "^3.0.3",
     "@zxcvbn-ts/core": "^3.0.4",
     "animate.css": "^4.1.1",
+    "ansi-to-html": "^0.7.2",
     "axios": "^1.9.0",
     "dayjs": "^1.11.13",
     "echarts": "^5.6.0",

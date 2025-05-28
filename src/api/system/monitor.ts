@@ -21,6 +21,12 @@ export type ServerInfo = {
   python?: string;
 };
 
+// 获取日志流
+export function getStreamLogs() {
+  const url = "/api/monitor/logs/stream";
+  return new EventSource(url);
+}
+
 /** 获取API操作日志列表 */
 export const getApiList = (data?: object) => {
   return http.request<Result>("post", "/api/monitor/ApiLog/list", {

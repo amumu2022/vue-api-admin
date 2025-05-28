@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-03-22 22:40:11
- * @LastEditTime: 2025-03-23 21:35:23
+ * @LastEditTime: 2025-05-23 21:42:06
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -17,9 +17,6 @@ interface FormItemProps {
   category?: string; // API分类
   daily_call_limit?: number; // 每日调用限制
   total_call_limit?: number; // 总调用限制
-  free: boolean; // 是否免费
-  enable: boolean; // 是否启用
-  token: boolean; // 是否需要token
 }
 
 interface FormProps {
