@@ -1,1 +1,0 @@
-import{m as o,c as t,o as r,b as a}from"./index-CxPIr2ZT.js";const n={viewBox:"0 0 1024 1024",width:"1em",height:"1em"};function l(m,e){return r(),t("svg",n,e[0]||(e[0]=[a("path",{fill:"currentColor",d:"m192 384l320 384l320-384z"},null,-1)]))}const c=o({name:"ep-caret-bottom",render:l});export{c as A};
