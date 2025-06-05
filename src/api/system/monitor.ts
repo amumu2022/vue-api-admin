@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-03-26 21:04:52
- * @LastEditTime: 2025-03-26 21:34:42
+ * @LastEditTime: 2025-05-31 20:54:19
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -26,6 +26,11 @@ export function getStreamLogs() {
   const url = "/api/monitor/logs/stream";
   return new EventSource(url);
 }
+
+// 清空日志流
+export const DelLogs = () => {
+  return http.request<ResultDetail>("delete", "/api/monitor/logs/del");
+};
 
 /** 获取API操作日志列表 */
 export const getApiList = (data?: object) => {

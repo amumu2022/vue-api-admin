@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-04-08 22:17:34
- * @LastEditTime: 2025-04-11 21:36:18
+ * @LastEditTime: 2025-06-05 21:27:39
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -99,4 +99,5 @@ const emailSendRules = reactive<FormRules>({
     }
   ]
 });
+
 export { emailConfigRules, emailSendRules };

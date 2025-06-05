@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { InfoFilled } from "@element-plus/icons-vue";
 import { emailConfigRules, emailSendRules } from "../utils/rule";
-import { EmailSet, EmailSend } from "../utils/types";
 import { message } from "@/utils/message";
 import { ref, onBeforeMount } from "vue";
 import { getDockData, UpdateDock } from "@/api/system/dock";

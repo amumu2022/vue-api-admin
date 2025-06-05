@@ -7,7 +7,7 @@
  */
 
 import { ref, onMounted, onUnmounted, nextTick, computed } from "vue";
-import { getStreamLogs } from "@/api/system/monitor";
+import { getStreamLogs, DelLogs } from "@/api/system/monitor";
 import AnsiToHtml from "ansi-to-html";
 
 const converter = new AnsiToHtml();
@@ -96,8 +96,9 @@ export function useLogStream() {
     }
   }
 
-  function clearLogs() {
+  async function clearLogs() {
     logs.value = [];
+    await DelLogs();
     autoScroll.value = true;
     scrollToBottom();
   }
