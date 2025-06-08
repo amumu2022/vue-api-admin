@@ -1,0 +1,411 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: #f5f7fc;
+color: #333;
+line-height: 1.6;
+padding: 20px;
+min-height: 100vh;
+}
+
+.container {
+max-width: 1000px;
+margin: 0 auto;
+}
+
+/* 顶部导航栏 - 符合图片样式 */
+.navbar {
+background-color: #1e67c2;
+color: white;
+padding: 15px 25px;
+border-radius: 8px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 25px;
+box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+font-size: 20px;
+font-weight: bold;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.logo i {
+font-size: 22px;
+}
+
+.github-link {
+color: rgba(255, 255, 255, 0.9);
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 5px;
+transition: 0.3s;
+padding: 5px 10px;
+border-radius: 4px;
+font-size: 15px;
+}
+
+.github-link:hover {
+background: rgba(255, 255, 255, 0.1);
+color: white;
+}
+
+/* API标题区域 - 匹配图片样式 */
+.api-header {
+background: linear-gradient(to right, #2b8af0, #1a60c0);
+color: white;
+padding: 22px 30px;
+text-align: center;
+border-radius: 8px 8px 0 0;
+}
+
+.api-title {
+font-size: 24px;
+font-weight: 600;
+margin-bottom: 5px;
+}
+
+.api-subtitle {
+font-size: 16px;
+font-weight: 400;
+opacity: 0.9;
+}
+
+/* 元数据区域 - 关键优化 */
+.api-meta-container {
+padding: 18px 25px;
+background: #f9fbff;
+border-bottom: 1px solid #e0eeff;
+}
+
+/* 电脑端布局 - 8:2:2 */
+.api-meta-grid {
+display: grid;
+grid-template-columns: 8fr 2fr 2fr;
+gap: 15px;
+}
+
+.meta-item {
+display: flex;
+flex-direction: column;
+}
+
+.meta-label {
+color: #1e67c2;
+font-weight: 600;
+font-size: 14px;
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 8px;
+}
+
+.meta-content {
+color: #444;
+display: flex;
+align-items: center;
+font-size: 15px;
+height: 44px; /* 统一高度 */
+padding: 0 15px;
+border-radius: 5px;
+background: rgba(43, 138, 240, 0.1);
+border: 1px solid rgba(43, 138, 240, 0.2);
+}
+
+.meta-content.url {
+font-family: "Courier New", monospace;
+color: #145cb3;
+font-weight: 500;
+cursor: pointer;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.meta-content.method {
+justify-content: center;
+background: rgba(46, 204, 113, 0.15);
+color: #27ae60;
+font-weight: 600;
+}
+
+.meta-content.format {
+justify-content: center;
+background: rgba(52, 152, 219, 0.15);
+color: #2980b9;
+font-weight: 600;
+}
+
+/* 手机端布局 - 关键优化 */
+@media (max-width: 768px) {
+.api-meta-grid {
+    grid-template-columns: 1fr; /* 改为单列布局 */
+}
+
+.methods-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.meta-content.url {
+    word-break: break-all; /* URL自动换行 */
+    white-space: normal; /* 多行显示 */
+    line-height: 1.5; /* 增加行高 */
+    height: auto; /* 自动高度 */
+    min-height: 44px; /* 最小高度 */
+}
+}
+
+/* 参数内容区域 */
+.param-container {
+padding: 20px 30px;
+background: white;
+}
+
+.section-title {
+font-size: 18px;
+color: #1e67c2;
+margin-bottom: 15px;
+padding-bottom: 10px;
+border-bottom: 2px solid #e7f1fd;
+position: relative;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.section-title::after {
+content: "";
+position: absolute;
+bottom: -2px;
+left: 0;
+width: 50px;
+height: 2px;
+background: #2b8af0;
+}
+
+.section-title i {
+font-size: 16px;
+}
+
+.description {
+margin-bottom: 20px;
+color: #444;
+line-height: 1.7;
+font-size: 15px;
+padding: 15px;
+background: #f8fbff;
+border-radius: 8px;
+border-left: 4px solid #2b8af0;
+}
+
+.params-table {
+width: 100%;
+border-collapse: collapse;
+margin-bottom: 25px;
+background: white;
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+border: 1px solid #e7f1fd;
+}
+
+.params-table th {
+background-color: #f0f6ff;
+color: #1e67c2;
+text-align: left;
+font-weight: 600;
+padding: 15px;
+font-size: 15px;
+border-bottom: 1px solid #d8e7ff;
+}
+
+.params-table td {
+padding: 16px 15px;
+border-bottom: 1px solid #f0f7ff;
+color: #555;
+vertical-align: top;
+}
+
+.params-table tr:last-child td {
+border-bottom: none;
+}
+
+.params-table tr:nth-child(even) {
+background-color: #f9fbff;
+}
+
+.params-table tr:hover {
+background-color: #f0f6ff;
+}
+
+.param-name {
+font-weight: 500;
+color: #2c3e50;
+}
+
+.param-type {
+color: #d35400;
+font-weight: 500;
+background: rgba(211, 84, 0, 0.08);
+padding: 4px 8px;
+border-radius: 4px;
+font-family: monospace;
+display: inline-block;
+}
+
+.param-required {
+color: #e74c3c;
+font-weight: 500;
+background: rgba(231, 76, 60, 0.08);
+padding: 4px 8px;
+border-radius: 4px;
+display: inline-block;
+}
+
+.param-optional {
+color: #27ae60;
+font-weight: 500;
+background: rgba(39, 174, 96, 0.08);
+padding: 4px 8px;
+border-radius: 4px;
+display: inline-block;
+}
+
+.param-description {
+line-height: 1.6;
+}
+
+.no-content {
+text-align: center;
+color: #7f8c8d;
+font-style: italic;
+padding: 30px;
+background: #f9fbff;
+border-radius: 8px;
+margin: 20px 0;
+}
+
+/* 页脚 - 匹配图片样式 */
+.footer {
+display: grid;
+grid-template-columns: 1fr auto;
+color: #7f8c8d;
+padding: 20px 0;
+margin-top: 10px;
+font-size: 14px;
+}
+
+.copyright {
+text-align: left;
+}
+
+.powered-by {
+text-align: right;
+}
+
+/* Toast通知 */
+.toast {
+position: fixed;
+top: 30px;
+right: 30px;
+padding: 12px 25px;
+background: rgba(46, 204, 113, 0.95);
+color: white;
+border-radius: 4px;
+font-weight: 500;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+z-index: 1000;
+display: none;
+align-items: center;
+gap: 10px;
+animation: fadeIn 0.3s, fadeOut 0.3s 2s;
+}
+
+@keyframes fadeIn {
+from {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes fadeOut {
+from {
+    opacity: 1;
+}
+to {
+    opacity: 0;
+}
+}
+
+/* 响应式设计 - 移动端优化 */
+@media (max-width: 768px) {
+/* 调整顶部导航 */
+.navbar {
+    padding: 12px 15px;
+}
+
+/* 调整API标题 */
+.api-header {
+    padding: 18px 20px;
+}
+
+.api-title {
+    font-size: 22px;
+}
+
+.api-subtitle {
+    font-size: 14px;
+}
+
+/* 调整内容区域 */
+.param-container {
+    padding: 15px;
+}
+
+.section-title {
+    font-size: 17px;
+}
+
+/* 调整页脚 */
+.footer {
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.copyright,
+.powered-by {
+    text-align: center;
+}
+}
+
+@media (max-width: 480px) {
+.api-title {
+    font-size: 20px;
+}
+
+.params-table {
+    font-size: 14px;
+}
+
+.params-table th,
+.params-table td {
+    padding: 12px 10px !important;
+}
+}

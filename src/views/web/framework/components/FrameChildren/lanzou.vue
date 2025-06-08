@@ -11,7 +11,7 @@ const props = defineProps<{
 const newFormInline = ref<LZYcloudDriveSet>({
   username: "",
   password: "",
-  folfer_id: "",
+  folder_id: "",
   size: 10
 });
 
@@ -34,7 +34,7 @@ async function reloadData() {
     newFormInline.value = {
       username: back?.username || "",
       password: back?.password || "",
-      folfer_id: back?.folfer_id || "",
+      folder_id: back?.folder_id || "",
       size: back?.size || 10
     };
   }
@@ -64,9 +64,9 @@ onBeforeMount(() => {
       />
     </el-form-item>
 
-    <el-form-item label="文件夹ID：" prop="folfer_id">
+    <el-form-item label="文件夹ID：" prop="folder_id">
       <el-input
-        v-model="newFormInline.folfer_id"
+        v-model="newFormInline.folder_id"
         clearable
         placeholder="请输入文件夹ID"
       />

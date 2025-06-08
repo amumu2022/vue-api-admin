@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-04-08 22:19:31
- * @LastEditTime: 2025-04-08 22:19:38
+ * @LastEditTime: 2025-06-08 00:50:49
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -25,4 +25,9 @@ export const UpdateDock = (name: string, data?: object | string) => {
   return http.request<ResultDetail>("put", `/api/set/dock/${name}/info`, {
     data
   });
+};
+
+/** 获取模型列表 */
+export const getModelsApi = () => {
+  return http.request<ResultDetail>("get", `/api/set/dock/getModelsApi`);
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-05-15 20:01:40
- * @LastEditTime: 2025-06-05 21:53:36
+ * @LastEditTime: 2025-06-07 23:51:40
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -16,7 +16,7 @@ interface FormItemProps {
 interface LZYcloudDriveSet {
   username: string;
   password: string;
-  folfer_id: string;
+  folder_id: string;
   size: number;
 }
 
@@ -33,6 +33,14 @@ interface CreatingSpaceSet {
 interface QQhttpSet {
   url: string;
   bot_id: string;
+}
+
+/**
+ * openroute设置
+ */
+interface OpenRouteSet {
+  ApiKey: string;
+  model: string;
 }
 
 /**
@@ -63,5 +71,6 @@ export type {
   FormProps,
   LZYcloudDriveSet,
   CreatingSpaceSet,
-  QQhttpSet
+  QQhttpSet,
+  OpenRouteSet
 };

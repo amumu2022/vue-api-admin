@@ -21,7 +21,7 @@ export type ResultDetail = {
 };
 
 export type MockDetail = {
-  success: boolean;
+  success?: boolean;
   data: any;
 };
 

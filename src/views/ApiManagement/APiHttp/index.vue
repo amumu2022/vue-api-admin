@@ -59,7 +59,7 @@ const bodyState = reactive({
 
 async function onSearch() {
   loading.value = true;
-  const { data } = await getApiRoutesModel({});
+  const { data } = await getApiRoutesModel();
   let newData = convertOpenApiToTree(data);
   apiGroups.value = newData;
   setTimeout(() => {

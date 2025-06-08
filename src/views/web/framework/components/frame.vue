@@ -14,6 +14,7 @@ import Lanzou from "./FrameChildren/lanzou.vue";
 import QQHttp from "./FrameChildren/QQHttp.vue";
 import CreatingSpace from "./FrameChildren/creatingSpace.vue";
 import Empty from "./FrameChildren/Empty.vue";
+import OpenRoute from "./FrameChildren/OpenRoute.vue";
 
 interface Product {
   index: number;
@@ -68,6 +69,14 @@ const productList: Product[] = [
   },
   {
     index: 6,
+    isSetup: true,
+    type: 1,
+    name: "OpenRoute",
+    description: "一个可以调用免费AI模型的网站",
+    configName: "openroute"
+  },
+  {
+    index: 999,
     isSetup: false,
     type: 3,
     name: "更多",
@@ -84,6 +93,8 @@ const handleManageProduct = (product: Product) => {
     component = CreatingSpace;
   } else if (product.index === 5) {
     component = QQHttp;
+  } else if (product.index === 6) {
+    component = OpenRoute;
   } else {
     component = Empty;
   }

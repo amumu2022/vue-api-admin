@@ -26,10 +26,8 @@ export const getApiRoutes = (data?: object | string) => {
 };
 
 /** 获取api列表 */
-export const getApiRoutesModel = (data?: object | string) => {
-  return http.request<ResultDetail>("post", "/api/apiInfo/getApiRoutesModel", {
-    data
-  });
+export const getApiRoutesModel = () => {
+  return http.request<ResultDetail>("get", "/api/apiInfo/getApiRoutesModel");
 };
 
 /** 更新api数据 */

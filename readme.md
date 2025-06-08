@@ -12,7 +12,6 @@
 
 </div>
 
-
 基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置130+条api接口。
 
 ### 特性
@@ -25,13 +24,15 @@
 - **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
 - **自定义QPS限制**：可以对每条API进行QPS限制。
 
-
 ### 在线预览
 
- - API文档： <https://wanfeng-api.apifox.cn/> [![docs](https://img.shields.io/badge/点我跳转-API文档-7F0347)](https://wanfeng-api.apifox.cn)
- - 官网： <http://api.levial.dpdns.org/> [![web](https://img.shields.io/badge/点我跳转-官网-91A1E7)](http://api.levial.dpdns.org)
- - 服务地址： <http://api.levial.dpdns.org/api/v1/> [![server](https://img.shields.io/badge/点我跳转-服务地址-red)](http://api.levial.dpdns.org/api/v1)
+- API文档： <https://wanfeng-api.apifox.cn/> [![docs](https://img.shields.io/badge/点我跳转-API文档-7F0347)](https://wanfeng-api.apifox.cn)
+- 官网： <http://api.levial.dpdns.org/> [![web](https://img.shields.io/badge/点我跳转-官网-91A1E7)](http://api.levial.dpdns.org)
+- 服务地址： <http://api.levial.dpdns.org/api/v1/> [![server](https://img.shields.io/badge/点我跳转-服务地址-red)](http://api.levial.dpdns.org/api/v1)
 
+### API展示页
+
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/API展示.png)
 
 ### 登录页
 
@@ -65,9 +66,13 @@
 
 ![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口监控.png)
 
-### 登录日志
+### 系统日志
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/登录日志.png)
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/系统日志.png)
+
+### 平台对接
+
+![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
 
 ### 黑名单管理
 
@@ -84,7 +89,6 @@
 ### 平台对接
 
 ![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
-
 
 ### 本地启动
 
@@ -116,7 +120,7 @@ source .myapi/bin/activate  # Linux/Mac
 
 ```sh
 poetry install
-``` 
+```
 
 4. 初始化数据
 
@@ -124,13 +128,11 @@ poetry install
 python cli/init.py
 ```
 
-
 5. 启动服务
 
 ```sh
 python app.py
 ```
-
 
 服务现在应该正在运行，访问 <http://localhost:8633/docs> 查看API文档
 
@@ -144,6 +146,14 @@ python app.py
 
 ```text
 https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
+```
+
+```text
+https://ghfast.top/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
+```
+
+```text
+https://gh-proxy.net/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
 ```
 
 可直接部署到虚拟主机

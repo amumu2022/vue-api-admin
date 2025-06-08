@@ -1,7 +1,7 @@
 <!--
  * @Author: XDTEAM
  * @Date: 2025-06-05 21:50:06
- * @LastEditTime: 2025-06-05 22:25:54
+ * @LastEditTime: 2025-06-07 23:29:07
  * @LastEditors: XDTEAM
  * @Description: 
 -->
@@ -62,6 +62,11 @@ function removeCookie(index: number) {
   }
 }
 
+// 打开魔搭社区页面
+function openModelScope() {
+  window.open("https://www.modelscope.cn/", "_blank");
+}
+
 onBeforeMount(() => {
   reloadData();
 });
@@ -69,6 +74,23 @@ onBeforeMount(() => {
 
 <template>
   <el-form label-width="82px">
+    <el-form-item label="🔺">
+      <el-row :gutter="10">
+        <!-- 描述文本 -->
+        <el-col :xs="14" :sm="14" :md="20" :lg="20" :xl="20">
+          <span style="color: red; font-weight: bold"
+            >请填写魔搭社区的 m_session_id</span
+          >
+        </el-col>
+        <!-- 跳转按钮 -->
+        <el-col :xs="10" :sm="10" :md="4" :lg="4" :xl="4" class="button-group">
+          <el-button type="primary" @click="openModelScope">
+            点我跳转
+          </el-button>
+        </el-col>
+      </el-row>
+    </el-form-item>
+
     <template v-for="(cookie, index) in cookiesList" :key="index">
       <el-form-item :label="'Cookie ' + (index + 1)">
         <el-row :gutter="10">

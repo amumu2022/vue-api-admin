@@ -1,7 +1,7 @@
 <!--
  * @Author: xdteam
  * @Date: 2024-05-05 23:07:11
- * @LastEditTime: 2025-05-28 12:27:03
+ * @LastEditTime: 2025-06-07 23:35:25
  * @LastEditors: XDTEAM
  * @Description: 
  * @FilePath: \vue-pure-admin\src\views\personal\features\logs\index.vue
@@ -103,5 +103,24 @@ const { scrollbarRef, parsedLogs, handleScroll, clearLogs } = useLogStream();
 }
 :deep(.el-scrollbar__thumb) {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 移动端样式 */
+@media (max-width: 768px) {
+  .log-container {
+    overflow-x: auto; /* 启用水平滚动 */
+  }
+
+  .log-item {
+    align-items: center;
+    line-height: 1.5;
+    min-width: 1000px; /* 设置最小宽度，确保内容可以水平滚动 */
+  }
+
+  .log-content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 </style>
