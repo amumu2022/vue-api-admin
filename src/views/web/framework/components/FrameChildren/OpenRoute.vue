@@ -24,8 +24,8 @@ async function refreshModels() {
     const { data } = await getModelsApi();
     if (data && Array.isArray(data)) {
       short_name_list.value = data.map(item => ({
-        value: item.name,
-        label: item.name
+        value: item.model,
+        label: item.model
       }));
 
       storageLocal().setItem("openroute", { data: short_name_list.value });
@@ -106,12 +106,14 @@ function openLink() {
         filterable
         :options="short_name_list"
         placeholder="请选择模型"
-        style="width: 240px"
+        style="width: 400px"
       />
       <el-button
         class="reset-margin"
         circle
+        type="primary"
         :icon="useRenderIcon(Refresh)"
+        style="margin-left: 20px"
         @click="refreshModels"
       />
     </el-form-item>

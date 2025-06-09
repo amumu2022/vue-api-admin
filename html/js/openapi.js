@@ -1,5 +1,5 @@
 /** 将OpenAPI格式转换为树形结构 */
-const convertOpenApiToTree = (openApiData) => {
+const convertOpenApiToTree = openApiData => {
   const result = [];
   const pathMap = new Map();
   let idCounter = 1;
@@ -24,7 +24,7 @@ const convertOpenApiToTree = (openApiData) => {
 
       // 提取parameters和requestBody
       const params =
-        operation.parameters?.map((param) => ({
+        operation.parameters?.map(param => ({
           name: param.name,
           in: param.in,
           required: param.required,
@@ -69,43 +69,43 @@ const convertOpenApiToTree = (openApiData) => {
   return result;
 };
 
-const convertPropertiesToArray = (item) => {
+const convertPropertiesToArray = item => {
   // 初始化 body 数据
-  var body =  item
-    ? Object.fromEntries(
-        Object.entries(item)
-      )
-    : {};
-      
-    return body;
+  var body = item ? Object.fromEntries(Object.entries(item)) : {};
+
+  return body;
 };
 
-const convertParamsToArray = (item) => {
+const convertParamsToArray = item => {
   // 初始化 params 数据
   var params = item.reduce((acc, param) => {
     acc[param.name] = {
       name: param.name,
       type: param.schema?.type,
-      default: param.schema?.default,
+      default: param.schema?.default
     };
     return acc;
   }, {});
 
-    return params;
+  return params;
 };
-
 
 /**
  * 根据 funcName 获取对应的 JSON 数据
  * @param {Array} treeData - 树形结构的 API 数据
- * @param {string} id - 要查找的 id
+ * @param {string} url - 要查找的 url
  * @returns {Object|null} - 返回对应的 JSON 数据或 null
  */
-const getApiDataByUrl = (treeData, id) => {
+/**
+ * 根据URL路径从树形数据中查找匹配的API数据
+ * @param {Array} treeData - 包含API分组的树形数据
+ * @param {string} url - 要查找的API路径
+ * @returns {Object|null} 返回匹配的API对象，未找到则返回null
+ */
+const getApiDataByUrl = (treeData, url) => {
   for (const group of treeData) {
     for (const child of group.children) {
-      console.log(child.id, id);
-      if (String(child.id) === id) {
+      if (child.path === url) {
         return child;
       }
     }
