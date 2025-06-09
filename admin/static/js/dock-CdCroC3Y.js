@@ -1,0 +1,1 @@
+import{aZ as e}from"./index-B7RPwIGl.js";const a=t=>e.request("post","/api/set/dock/list",{data:t}),r=(t,s)=>e.request("put",`/api/set/dock/${t}/info`,{data:s}),p=()=>e.request("get","/api/set/dock/getModelsApi");export{r as U,p as a,a as g};

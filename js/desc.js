@@ -24,25 +24,25 @@ function fetchApiModelData() {
 // 从URL获取url参数
 function getUrlFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('id');
+  return urlParams.get('url');
 }
 
 // 创建API详情页面
 async function createApiHTML() {
   try {
     // 获取url
-    const id = getUrlFromURL();
-    if (!id) {
-      throw new Error("缺少id参数");
+    const url = getUrlFromURL();
+    if (!url) {
+      throw new Error("缺少url参数");
     }
 
     // 获取API数据
     const apiModelData = await fetchApiModelData();
     const apiTree = convertOpenApiToTree(apiModelData);
-    const apiData = getApiDataByUrl(apiTree, id);
+    const apiData = getApiDataByUrl(apiTree, url);
     
     if (!apiData) {
-      throw new Error(`找不到id为${id}的API`);
+      throw new Error(`找不到url为${url}的API`);
     }
 
     // 基础URL配置
@@ -53,7 +53,9 @@ async function createApiHTML() {
     document.getElementById("apiUrl").textContent = BASE_URL + apiData.path;
     document.getElementById("apiMethod").textContent = apiData.methods.join("/");
     document.getElementById("apiFormat").textContent = "JSON";
-    document.getElementById("apiDescription").textContent = apiData.description.split("\n")[0];
+    document.getElementById("apiDescription").innerHTML = apiData.description
+      .replace(/\n/g, "<br>") // 将换行符替换为 <br>
+      .replace(/ /g, "&nbsp;"); // 将空格替换为 &nbsp;
     
     // 渲染Query参数表格
     renderQueryParams(apiData);

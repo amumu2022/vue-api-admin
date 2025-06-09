@@ -181,9 +181,9 @@ function renderApiData(categories) {
 
   // 绑定卡片点击事件
   $(".api-card").on("click", function () {
-    const id = $(this).data("id");
-    if (id) {
-      window.open(`desc.html?id=${id}`, "_blank");
+    const path = $(this).data("path");
+    if (path) {
+      window.open(`desc.html?url=${path}`, "_blank");
     }
   });
 }
@@ -195,7 +195,6 @@ function createCardHTML(api, iconClass) {
 
   return `
     <div class="api-card ${disableClass}" 
-      data-id="${api.id || ''}" 
       data-path="${api.path || ''}" 
       data-url="${api.url || ''}" 
       data-funcname="${api.funcName || ''}">
@@ -208,7 +207,7 @@ function createCardHTML(api, iconClass) {
         </div>
       </div>
       <h3 class="card-title">${api.summary}</h3>
-      <p class="card-description">${api.description}</p>
+      <p class="card-description">${api.description.split("\n")[0]}</p>
       <div class="call-count">调用: <strong>${api.total_call}</strong></div>
       <div class="card-meta">
         <div class="meta-item">
