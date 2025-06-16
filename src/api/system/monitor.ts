@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-03-26 21:04:52
- * @LastEditTime: 2025-05-31 20:54:19
+ * @LastEditTime: 2025-06-12 22:21:12
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -24,7 +24,7 @@ export type ServerInfo = {
 // 获取日志流
 export function getStreamLogs() {
   const url = "/api/monitor/logs/stream";
-  return new EventSource(url);
+  return http.sse(url);
 }
 
 // 清空日志流

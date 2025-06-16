@@ -13,6 +13,7 @@ import { stringify } from "qs";
 import NProgress from "../progress";
 import { getToken, formatToken } from "@/utils/auth";
 import { useUserStoreHook } from "@/store/modules/user";
+import { EventSourcePolyfill } from "event-source-polyfill";
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -188,6 +189,22 @@ class PureHttp {
     config?: PureHttpRequestConfig
   ): Promise<T> {
     return this.request<T>("get", url, params, config);
+  }
+
+  /** 添加支持 SSE 的方法 */
+  public sse(url: string): EventSource {
+    const token = getToken()?.accessToken;
+    const headers: Record<string, string> = {};
+
+    if (token) {
+      headers["Authorization"] = formatToken(token);
+    }
+
+    return new EventSourcePolyfill(url, {
+      headers: headers,
+      withCredentials: true, // 如果需要携带cookie
+      heartbeatTimeout: 120000 // 心跳超时时间，默认2分钟
+    });
   }
 }
 

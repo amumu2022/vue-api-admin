@@ -1,7 +1,7 @@
 <!--
  * @Author: XDTEAM
  * @Date: 2025-03-20 21:58:17
- * @LastEditTime: 2025-05-23 21:53:34
+ * @LastEditTime: 2025-06-10 21:28:01
  * @LastEditors: XDTEAM
  * @Description: 
 -->
@@ -31,7 +31,6 @@ const props = withDefaults(defineProps<FormProps>(), {
 const ruleFormRef = ref();
 const { switchStyle } = usePublicHooks();
 const newFormInline = ref(props.formInline);
-console.log("newFormInline", newFormInline.value);
 function getRef() {
   return ruleFormRef.value;
 }

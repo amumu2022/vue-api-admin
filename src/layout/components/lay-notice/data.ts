@@ -1,3 +1,10 @@
+/*
+ * @Author: XDTEAM
+ * @Date: 2025-05-15 20:01:39
+ * @LastEditTime: 2025-06-12 21:07:06
+ * @LastEditors: XDTEAM
+ * @Description:
+ */
 export interface ListItem {
   avatar: string;
   title: string;

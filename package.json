@@ -60,6 +60,7 @@
     "dayjs": "^1.11.13",
     "echarts": "^5.6.0",
     "element-plus": "^2.9.8",
+    "event-source-polyfill": "^1.0.31",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "md-editor-v3": "^5.4.5",

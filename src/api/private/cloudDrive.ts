@@ -1,7 +1,7 @@
 /*
  * @Author: XDTEAM
  * @Date: 2025-04-08 22:19:31
- * @LastEditTime: 2025-05-01 14:31:58
+ * @LastEditTime: 2025-06-16 23:14:40
  * @LastEditors: XDTEAM
  * @Description:
  */
@@ -15,7 +15,6 @@ export const XFJParse = (data?: object | string) => {
   });
 };
 
-
 /** 获取美图列表 */
 export const getImageList = (data?: object | string) => {
   return http.request<Result>("post", "/api/cloudDrive/setu/get", {
@@ -23,13 +22,11 @@ export const getImageList = (data?: object | string) => {
   });
 };
 
-
 /** 删除美图 */
 export const deleteImage = id => {
   const url = `/api/cloudDrive/setu/del/${id}`;
   return http.request<ResultDetail>("delete", url);
 };
-
 
 /** 获取音乐列表 */
 export const getMusicList = (data?: object | string) => {
@@ -38,9 +35,21 @@ export const getMusicList = (data?: object | string) => {
   });
 };
 
-
 /** 删除音乐 */
 export const deleteMusic = id => {
   const url = `/api/cloudDrive/music/del/${id}`;
+  return http.request<ResultDetail>("delete", url);
+};
+
+/** 获取图库列表 */
+export const getImageMapList = (data?: object | string) => {
+  return http.request<Result>("post", "/api/tuchuang/image/list", {
+    data
+  });
+};
+
+/** 删除音乐 */
+export const deleteImageMap = id => {
+  const url = `/api/tuchuang/iamge/del/${id}`;
   return http.request<ResultDetail>("delete", url);
 };

@@ -5,6 +5,18 @@ import type {
   AxiosRequestConfig
 } from "axios";
 
+declare module "event-source-polyfill" {
+  export class EventSourcePolyfill extends EventSource {
+    constructor(url: string, configuration?: EventSourceInitDict);
+  }
+
+  export interface EventSourceInitDict {
+    headers?: Record<string, string>;
+    withCredentials?: boolean;
+    heartbeatTimeout?: number;
+  }
+}
+
 export type resultType = {
   accessToken?: string;
 };
