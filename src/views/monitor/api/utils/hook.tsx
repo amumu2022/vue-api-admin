@@ -8,6 +8,7 @@ import { type Ref, ref, h, toRaw, reactive, onMounted } from "vue";
 import { addDialog, closeDialog } from "@/components/ReDialog";
 import { deviceDetection } from "@pureadmin/utils";
 import { useCopyToClipboard } from "@pureadmin/utils";
+import { openIpLocation } from "@/api/common";
 
 const { clipboardValue, copied } = useCopyToClipboard();
 const isMobile = ref(deviceDetection());
@@ -123,7 +124,17 @@ export function useRole(tableRef: Ref) {
     {
       label: "IP地址",
       prop: "ip",
-      minWidth: 100
+      minWidth: 100,
+      cellRenderer: ({ row }) => (
+        <el-button
+          type="primary"
+          link
+          style="text-decoration: underline; padding: 0"
+          onClick={() => openIpLocation(row.ip)}
+        >
+          {row.ip}
+        </el-button>
+      )
     },
     {
       label: "请求状态",
