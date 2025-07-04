@@ -32,6 +32,17 @@ jobs:
       - name: Build
         run: pnpm build
 
+      # 新增步骤：将 dist 文件夹内容移动到 dist/admin
+      - name: Move build output to admin folder
+        run: |
+          mkdir -p dist/admin
+          mv dist/* dist/admin || true
+
+      # 新增步骤：将 html 文件夹内容复制到 dist 根目录
+      - name: Copy html files to dist
+        run: |
+          cp -r html/* dist/
+
       - name: Install zip
         run: sudo apt-get install -y zip
 

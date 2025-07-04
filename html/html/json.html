@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON美化与解析工具</title>
+    <link rel="stylesheet" href="../css/json.css"></link>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>JSON美化与解析工具</h1>
+                <label class="theme-toggle">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="file-upload">
+                <button id="uploadBtn">
+                    <i class="icon">📁</i> 上传JSON文件
+                </button>
+                <input type="file" id="fileInput" accept=".json,text/plain">
+            </div>
+        </header>
+        
+        <div class="tool-description">
+            <p>这是一个强大的JSON美化与解析工具，支持：</p>
+            <p>• 格式化JSON数据为可读样式</p>
+            <p>• 可视化树形结构展示</p>
+            <p>• 折叠/展开节点功能</p>
+            <p>• URL编码和Unicode解码</p>
+        </div>
+        
+        <div class="input-section">
+            <div class="textarea-header">
+                <label for="jsonInput"><strong>输入JSON数据：</strong></label>
+                <div class="char-count">字符数：<span id="charCount">0</span></div>
+            </div>
+            <div class="input-container">
+                <textarea id="jsonInput" placeholder="在此粘贴JSON数据或使用文件上传"></textarea>
+            </div>
+            
+            <div class="controls">
+                <button onclick="formatJSON()">
+                    <i class="icon">✨</i> 格式化JSON
+                </button>
+                <button onclick="parseJSON()">
+                    <i class="icon">🔍</i> 解析JSON
+                </button>
+                <button onclick="minifyJSON()" class="secondary">
+                    <i class="icon">📏</i> 压缩JSON
+                </button>
+                <button onclick="clearAll()" class="danger">
+                    <i class="icon">🗑️</i> 清空
+                </button>
+                <button onclick="loadSample()" class="success">
+                    <i class="icon">📝</i> 加载示例
+                </button>
+            </div>
+            
+            <div id="statusBar" class="status-bar"></div>
+        </div>
+        
+        <div class="output-section">
+            <div class="section-header">
+                <div class="section-title">JSON树形结构</div>
+                <div>
+                    <button onclick="expandAll()" class="secondary">
+                        <i class="icon">⤵️</i> 全部展开
+                    </button>
+                    <button onclick="collapseAll()" class="secondary">
+                        <i class="icon">⤴️</i> 全部折叠
+                    </button>
+                </div>
+            </div>
+            
+            <div class="tree" id="treeContainer">
+                <div class="empty-state">
+                    <div>📋</div>
+                    <h3>没有可显示的JSON数据</h3>
+                    <p>请输入JSON数据并点击"解析JSON"按钮</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>JSON美化与解析工具 v1.1 | 本工具完全在浏览器中运行，您的数据不会发送到任何服务器</p>
+        </footer>
+    </div>
+
+    <script>
+        // 主题切换
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', this.checked ? 'dark' : 'light');
+        });
+        
+        // 检查本地存储中的主题设置
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggle.checked = true;
+        }
+        
+        // 字符计数
+        const jsonInput = document.getElementById('jsonInput');
+        const charCount = document.getElementById('charCount');
+        
+        jsonInput.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+        
+        // 文件上传
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                jsonInput.value = e.target.result;
+                charCount.textContent = e.target.result.length;
+            };
+            reader.readAsText(file);
+        });
+        
+        // 显示状态信息
+        function showStatus(message, isError = false) {
+            const statusBar = document.getElementById('statusBar');
+            statusBar.textContent = message;
+            statusBar.className = 'status-bar ' + (isError ? 'error' : 'success');
+            
+            // 5秒后隐藏
+            setTimeout(() => {
+                statusBar.className = 'status-bar';
+                statusBar.textContent = '';
+            }, 5000);
+        }
+        
+        // 格式化JSON
+        function formatJSON() {
+            const input = jsonInput.value.trim();
+            if (!input) {
+                showStatus('请输入JSON数据', true);
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 4);
+                jsonInput.value = formatted;
+                charCount.textContent = formatted.length;
+                showStatus('JSON格式化成功！');
+            } catch (e) {
+                showStatus(`JSON格式化失败: ${e.message}`, true);
+            }
+        }
+        
+        // 压缩JSON
+        function minifyJSON() {
+            const input = jsonInput.value.trim();
+            if (!input) {
+                showStatus('请输入JSON数据', true);
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                jsonInput.value = minified;
+                charCount.textContent = minified.length;
+                showStatus('JSON压缩成功！');
+            } catch (e) {
+                showStatus(`JSON压缩失败: ${e.message}`, true);
+            }
+        }
+        
+        // 加载示例数据
+        function loadSample() {
+            const sampleJSON = `{
+  "status": "success",
+  "code": 200,
+  "data": {
+    "user": {
+      "id": 12345,
+      "name": "张三",
+      "email": "zhangsan@example.com",
+      "isActive": true,
+      "roles": ["admin", "editor"],
+      "profile": {
+        "bio": "热爱编程的设计师",
+        "website": "https://example.com/张三",
+        "location": "北京市"
+      },
+      "preferences": {
+        "theme": "dark",
+        "notifications": true,
+        "language": "zh-CN"
+      }
+    },
+    "system": {
+      "version": "1.2.3",
+      "environment": "production",
+      "maintenance": false
+    },
+    "messages": [
+      {
+        "id": 1,
+        "text": "欢迎使用本系统！",
+        "priority": "high",
+        "read": false
+      },
+      {
+        "id": 2,
+        "text": "请更新您的个人信息",
+        "priority": "medium",
+        "read": true
+      }
+    ]
+  },
+  "timestamp": "2023-07-20T14:30:00Z"
+}`;
+            jsonInput.value = sampleJSON;
+            charCount.textContent = sampleJSON.length;
+            showStatus('示例数据已加载！');
+        }
+        
+        // 解码值（URL解码和Unicode解码）
+        function decodeValue(value) {
+            if (typeof value === 'string') {
+                try {
+                    // 尝试URL解码
+                    const decoded = decodeURIComponent(value);
+                    if (decoded !== value) {
+                        return { value: decoded, isDecoded: true };
+                    }
+                } catch (e) {
+                    // 解码失败保持原样
+                }
+                
+                // 检查是否为Unicode转义字符串
+                if (/^\\u/.test(value) || /\\u[0-9a-fA-F]{4}/.test(value)) {
+                    try {
+                        const unicodeDecoded = value.replace(/\\u([\d\w]{4})/gi, (match, grp) => 
+                            String.fromCharCode(parseInt(grp, 16))
+                        );
+                        return { value: unicodeDecoded, isDecoded: true };
+                    } catch (e) {
+                        // Unicode解码失败
+                    }
+                }
+            }
+            return { value: value, isDecoded: false };
+        }
+        
+        // 创建树节点
+        function createTreeNode(data, depth = 0) {
+            const ul = document.createElement('ul');
+            
+            if (Array.isArray(data)) {
+                data.forEach((item, index) => {
+                    const li = document.createElement('li');
+                    li.dataset.depth = depth;
+                    
+                    // 创建键名和值容器
+                    const keyValueContainer = document.createElement('div');
+                    keyValueContainer.className = 'key-value';
+                    
+                    const keySpan = document.createElement('span');
+                    keySpan.className = 'key';
+                    keySpan.textContent = `[${index}]`;
+                    
+                    if (typeof item === 'object' && item !== null) {
+                        const toggle = document.createElement('span');
+                        toggle.className = 'toggle';
+                        toggle.textContent = '-';
+                        toggle.onclick = function() {
+                            const parentLi = this.parentNode.parentNode;
+                            parentLi.classList.toggle('collapsed');
+                            this.textContent = parentLi.classList.contains('collapsed') ? '+' : '-';
+                        };
+                        
+                        keyValueContainer.appendChild(toggle);
+                        keyValueContainer.appendChild(keySpan);
+                        
+                        const nested = createTreeNode(item, depth + 1);
+                        li.appendChild(keyValueContainer);
+                        li.appendChild(nested);
+                    } else {
+                        const { value, isDecoded } = decodeValue(item);
+                        const valueSpan = document.createElement('span');
+                        const type = typeof value;
+                        
+                        valueSpan.className = type;
+                        valueSpan.textContent = `: ${JSON.stringify(value)}`;
+                        
+                        if (isDecoded) {
+                            const decodeSpan = document.createElement('span');
+                            decodeSpan.className = 'url-decode';
+                            decodeSpan.textContent = `[已解码: ${value}]`;
+                            valueSpan.appendChild(decodeSpan);
+                        }
+                        
+                        keyValueContainer.appendChild(keySpan);
+                        keyValueContainer.appendChild(valueSpan);
+                        li.appendChild(keyValueContainer);
+                    }
+                    
+                    ul.appendChild(li);
+                });
+            } else if (typeof data === 'object' && data !== null) {
+                Object.entries(data).forEach(([key, value]) => {
+                    const li = document.createElement('li');
+                    li.dataset.depth = depth;
+                    
+                    // 创建键名和值容器
+                    const keyValueContainer = document.createElement('div');
+                    keyValueContainer.className = 'key-value';
+                    
+                    const keySpan = document.createElement('span');
+                    keySpan.className = 'key';
+                    keySpan.textContent = `"${key}"`;
+                    
+                    if (typeof value === 'object' && value !== null) {
+                        const toggle = document.createElement('span');
+                        toggle.className = 'toggle';
+                        toggle.textContent = '-';
+                        toggle.onclick = function() {
+                            const parentLi = this.parentNode.parentNode;
+                            parentLi.classList.toggle('collapsed');
+                            this.textContent = parentLi.classList.contains('collapsed') ? '+' : '-';
+                        };
+                        
+                        keyValueContainer.appendChild(toggle);
+                        keyValueContainer.appendChild(keySpan);
+                        
+                        const nested = createTreeNode(value, depth + 1);
+                        li.appendChild(keyValueContainer);
+                        li.appendChild(nested);
+                    } else {
+                        const { value: val, isDecoded } = decodeValue(value);
+                        const valueSpan = document.createElement('span');
+                        const type = typeof val;
+                        
+                        valueSpan.className = type;
+                        valueSpan.textContent = `: ${JSON.stringify(val)}`;
+                        
+                        if (isDecoded) {
+                            const decodeSpan = document.createElement('span');
+                            decodeSpan.className = 'url-decode';
+                            decodeSpan.textContent = `[已解码: ${val}]`;
+                            valueSpan.appendChild(decodeSpan);
+                        }
+                        
+                        keyValueContainer.appendChild(keySpan);
+                        keyValueContainer.appendChild(valueSpan);
+                        li.appendChild(keyValueContainer);
+                    }
+                    
+                    ul.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = `未知数据类型: ${data}`;
+                ul.appendChild(li);
+            }
+            
+            return ul;
+        }
+        
+        // 解析JSON
+        function parseJSON() {
+            const container = document.getElementById('treeContainer');
+            const text = jsonInput.value.trim();
+            
+            if (!text) {
+                showStatus('请输入或上传JSON数据', true);
+                return;
+            }
+            
+            try {
+                const parsed = JSON.parse(text);
+                container.innerHTML = '';
+                const tree = createTreeNode(parsed);
+                container.appendChild(tree);
+                showStatus('JSON解析成功！');
+            } catch (e) {
+                container.innerHTML = '<div class="empty-state"><div>❌</div><h3>JSON解析失败</h3><p>' + e.message + '</p></div>';
+                showStatus(`JSON解析失败: ${e.message}`, true);
+            }
+        }
+        
+        // 全部折叠
+        function collapseAll() {
+            const toggles = document.querySelectorAll('.toggle');
+            toggles.forEach(toggle => {
+                const parentLi = toggle.parentNode.parentNode;
+                if (!parentLi.classList.contains('collapsed')) {
+                    parentLi.classList.add('collapsed');
+                    toggle.textContent = '+';
+                }
+            });
+        }
+        
+        // 全部展开
+        function expandAll() {
+            const toggles = document.querySelectorAll('.toggle');
+            toggles.forEach(toggle => {
+                const parentLi = toggle.parentNode.parentNode;
+                if (parentLi.classList.contains('collapsed')) {
+                    parentLi.classList.remove('collapsed');
+                    toggle.textContent = '-';
+                }
+            });
+        }
+        
+        // 清空所有
+        function clearAll() {
+            jsonInput.value = '';
+            charCount.textContent = '0';
+            const container = document.getElementById('treeContainer');
+            container.innerHTML = '<div class="empty-state"><div>📋</div><h3>没有可显示的JSON数据</h3><p>请输入JSON数据并点击"解析JSON"按钮</p></div>';
+        }
+    </script>
+</body>
+</html>
