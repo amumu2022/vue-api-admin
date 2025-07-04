@@ -1,26 +1,101 @@
-<!doctype html>
-<html lang="en">
+<!--
+ * @Author: XDTEAM
+ * @Date: 2025-06-06 18:44:08
+ * @LastEditTime: 2025-06-07 00:09:32
+ * @LastEditors: XDTEAM
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="renderer" content="webkit" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WanFeng API服务</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <title>Levial API 管理系统</title>
-    <link rel="icon" href="/favicon.ico" />
-    <script>
-      window.process = {};
-    </script>
-    <script type="module" crossorigin src="/static/js/index-BZJQyb7W.js"></script>
-    <link rel="stylesheet" crossorigin href="/static/css/index-DNxAnkWv.css">
+    <link rel="stylesheet" href="./css/welcome.css" />
+    <script src="./config.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/welcome.js"></script>
   </head>
-
   <body>
-    <div id="app">
-      <style>#app,body,html{align-items:center;display:flex;height:100%;justify-content:center;overflow:hidden;position:relative;width:100%}.loader,.loader:after,.loader:before{animation:load-animation 1.8s ease-in-out infinite;animation-fill-mode:both;border-radius:50%;height:2.5em;width:2.5em}.loader{animation-delay:-.16s;color:#406eeb;font-size:10px;margin:80px auto;position:relative;text-indent:-9999em;top:0;transform:translateZ(0);transform:translate(-50%)}.loader:after,.loader:before{content:"";position:absolute;top:0}.loader:before{animation-delay:-.32s;left:-3.5em}.loader:after{left:3.5em}@keyframes load-animation{0%,80%,to{box-shadow:0 2.5em 0 -1.3em}40%{box-shadow:0 2.5em 0 0}}</style>
-      <div class="loader"></div>
+    <div class="container">
+      <!-- 顶部导航栏 -->
+      <nav class="top-nav">
+        <div class="brand">
+          <div class="logo">小墩团队</div>
+          <a href="./admin/index.html" class="official-site">后台/注册</a>
+        </div>
+        <div class="user-section">
+          <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div class="user-info">Levial</div>
+        </div>
+      </nav>
+
+      <!-- 头部信息 -->
+      <header class="header">
+        <div class="tagline">WanFeng API服务</div>
+        <h1 class="main-title">晚风</h1>
+        <p class="description">提供免费、稳定、快速、高效的API服务</p>
+
+        <div class="stats">
+          <div class="stat-item">
+            <i class="fas fa-folder"></i>
+            <span
+              >共收录了
+              <span class="stat-value" id="api-count">0</span> 个接口项目</span
+            >
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-bolt"></i>
+            <span><span class="stat-value">99.9%</span> 可用性</span>
+          </div>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="search-box"
+            id="api-search"
+            placeholder="搜索API名称 例如：网易云"
+          />
+        </div>
+      </header>
+
+      <!-- API内容区 -->
+      <main id="api-content">
+        <!-- 加载指示器 -->
+        <div class="loader">
+          <div class="spinner"></div>
+          <p>正在加载API数据，请稍候...</p>
+        </div>
+      </main>
+
+      <!-- 页脚 -->
+<!-- 页脚 -->
+    <footer class="footer">
+      <p>© 2025 WanFeng API服务 | 稳定、高效、安全的API服务</p>
+      <div class="footer-info" id="api-info">
+        <!-- API信息会通过JS渲染在这里 -->
+      </div>
+      <div class="footer-links">
+        <p>友情链接：</p>
+        <ul>
+          <li><a href="https://github.com" target="_blank">GitHub</a></li>
+          <li><a href="https://developer.mozilla.org/zh-CN/" target="_blank">MDN Web Docs</a></li>
+          <li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a></li>
+        </ul>
+      </div>
+      <div class="footer-note">
+        <p>本服务由 WanFeng 团队提供技术支持，欢迎访问我们的 <a href="./about.html">关于我们</a> 页面了解更多。</p>
+      </div>
+    </footer>
     </div>
   </body>
 </html>
