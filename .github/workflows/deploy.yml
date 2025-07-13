@@ -7,10 +7,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: # 关键授权配置
-      contents: write # 允许写入仓库
-      pages: write # 如果需要部署到 GitHub Pages
-      id-token: write # 如果需要 OIDC 认证
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
