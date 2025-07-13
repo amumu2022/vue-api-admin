@@ -7,10 +7,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
+    permissions: # 关键授权配置
+      contents: write # 允许写入仓库
+      pages: write # 如果需要部署到 GitHub Pages
+      id-token: write # 如果需要 OIDC 认证
 
     steps:
       - uses: actions/checkout@v4
@@ -49,21 +49,31 @@ jobs:
       - name: Zip build output
         run: zip -r dist.zip ./dist
 
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: latest
-          name: Release latest
-          files: ./dist.zip
-          draft: false
-          prerelease: false
-          overwrite: true
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: latest
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist.zip
+          asset_name: dist.zip
+          asset_content_type: application/zip
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自动注入的 token
+          publish_dir: ./dist # 替换为你的构建输出目录
           enable_jekyll: false
