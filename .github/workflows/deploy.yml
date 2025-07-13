@@ -49,27 +49,16 @@ jobs:
       - name: Zip build output
         run: zip -r dist.zip ./dist
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
-          release_name: Release v${{ github.run_number }}
+          name: Release latest
+          files: ./dist.zip
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist.zip
-          asset_name: dist.zip
-          asset_content_type: application/zip
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
