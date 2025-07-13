@@ -94,7 +94,7 @@ async function reloadSendEmail() {
 }
 
 async function saveEmail() {
-  const post_data = { name: "email", data: emailSetProps };
+  const post_data = { name: "email", data: emailSetProps.value };
   const data = await UpdateDock("email", post_data);
   if (data.success) {
     message(data.message, { type: "success" });
@@ -105,7 +105,7 @@ async function saveEmail() {
 }
 
 async function sendEmail() {
-  const send_data = emailSendProps;
+  const send_data = emailSendProps.value;
 
   const post_data = { name: "emailSend", data: send_data };
   const data = await UpdateDock("emailSend", post_data);
