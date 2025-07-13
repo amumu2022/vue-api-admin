@@ -52,8 +52,8 @@ jobs:
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: Release latest
+          tag_name: best
+          name: Release best
           files: ./dist.zip
           draft: false
           prerelease: false

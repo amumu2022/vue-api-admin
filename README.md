@@ -145,15 +145,15 @@ python app.py
 #### 方法一：下载打包源码
 
 ```text
-https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
+https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
 ```
 
 ```text
-https://ghfast.top/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
+https://ghfast.top/https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
 ```
 
 ```text
-https://gh-proxy.net/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
+https://gh-proxy.net/https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
 ```
 
 可直接部署到虚拟主机
