@@ -5,7 +5,7 @@ function fetchApiModelData() {
       url: `${CONFIG.API_BASE_URL}/api/apiInfo/getApiRoutesModel`,
       type: "GET",
       headers: {
-        Accept: "application/json, text/plain, */*",
+        Accept: "application/json, text/plain, */*"
       },
       success: function (response) {
         if (response.code === 200 && response.success) {
@@ -24,7 +24,14 @@ function fetchApiModelData() {
 // 从URL获取url参数
 function getUrlFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('url');
+  return urlParams.get("url");
+}
+
+function getRootPath() {
+  const { origin, pathname } = window.location;
+  // 获取到最后一个/，保留目录部分
+  const dir = pathname.substring(0, pathname.lastIndexOf("/") + 1);
+  return origin + dir;
 }
 
 // 创建API详情页面
@@ -40,23 +47,23 @@ async function createApiHTML() {
     const apiModelData = await fetchApiModelData();
     const apiTree = convertOpenApiToTree(apiModelData);
     const apiData = getApiDataByUrl(apiTree, url);
-    
+
     if (!apiData) {
       throw new Error(`找不到url为${url}的API`);
     }
 
-    // 基础URL配置
-    const BASE_URL = CONFIG.API_URL;
-
     // 渲染页面内容
     document.querySelector(".api-title").textContent = apiData.summary;
-    document.getElementById("apiUrl").textContent = BASE_URL + apiData.path;
-    document.getElementById("apiMethod").textContent = apiData.methods.join("/");
+    // 修改这里，拼接根路径和apiData.path
+    document.getElementById("apiUrl").textContent =
+      getRootPath().replace(/\/$/, "") + apiData.path;
+    document.getElementById("apiMethod").textContent =
+      apiData.methods.join("/");
     document.getElementById("apiFormat").textContent = "JSON";
     document.getElementById("apiDescription").innerHTML = apiData.description
       .replace(/\n/g, "<br>") // 将换行符替换为 <br>
       .replace(/ /g, "&nbsp;"); // 将空格替换为 &nbsp;
-    
+
     // 渲染Query参数表格
     renderQueryParams(apiData);
     // 渲染Body参数表格
@@ -102,7 +109,7 @@ function renderBodyParams(apiData) {
   if (!apiData.body || !apiData.body.properties) return;
 
   const requiredFields = apiData.body.required || [];
-  
+
   for (const [param, details] of Object.entries(apiData.body.properties)) {
     const isRequired = requiredFields.includes(param);
     const row = document.createElement("tr");
