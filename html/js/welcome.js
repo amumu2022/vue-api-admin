@@ -14,7 +14,7 @@ const iconClasses = [
   "fas fa-shield-alt",
   "fas fa-camera",
   "fas fa-headphones",
-  "fas fa-music",
+  "fas fa-music"
 ];
 
 // 全局缓存API数据
@@ -62,16 +62,16 @@ function fetchApiData() {
   }
 
   $.ajax({
-    url: `${CONFIG.API_BASE_URL}/api/apiInfo/getApiRoutes`,
+    url: `/api/apiInfo/getApiRoutes`,
     type: "POST",
     headers: {
       Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     data: JSON.stringify({
       summary: "",
       pageSize: 10,
-      currentPage: 1,
+      currentPage: 1
     }),
     success: function (response) {
       // 隐藏加载指示器
@@ -85,7 +85,7 @@ function fetchApiData() {
       ) {
         // 缓存API数据
         cachedApiData = response.data;
-        
+
         // 更新API信息
         renderApiInfo(response);
 
@@ -116,14 +116,14 @@ function fetchApiData() {
             <p>API请求失败: ${error}</p>
         </div>
       `);
-    },
+    }
   });
 }
 
 // 计算API总数（如果响应中没有提供total字段）
 function calculateTotalApis(categories) {
   let total = 0;
-  categories.forEach((category) => {
+  categories.forEach(category => {
     if (category.children && category.children.length > 0) {
       total += category.children.length;
     }
@@ -135,8 +135,8 @@ function calculateTotalApis(categories) {
 function renderApiInfo(response) {
   const apiInfoHtml = `
     <p>版本: ${response.version || "1.0.0"} | 开发者: ${
-    response.auth || "XD Team"
-  }</p>
+      response.auth || "XD Team"
+    }</p>
     <p>${response.notice || "微信公众号：自由小屋"}</p>
     <p>技术支持: <a href="mailto:${
       response.email || "xdteam01@163.com"
@@ -150,13 +150,13 @@ function renderApiData(categories) {
   let contentHtml = "";
 
   // 遍历每个分类
-  categories.forEach((category) => {
+  categories.forEach(category => {
     if (!category.children || category.children.length === 0) return;
 
     let apiCardsHtml = "";
 
     // 生成该分类下的API卡片
-    category.children.forEach((api) => {
+    category.children.forEach(api => {
       // 随机选择图标
       const randomIcon =
         iconClasses[Math.floor(Math.random() * iconClasses.length)];
@@ -195,9 +195,9 @@ function createCardHTML(api, iconClass) {
 
   return `
     <div class="api-card ${disableClass}" 
-      data-path="${api.path || ''}" 
-      data-url="${api.url || ''}" 
-      data-funcname="${api.funcName || ''}">
+      data-path="${api.path || ""}" 
+      data-url="${api.url || ""}" 
+      data-funcname="${api.funcName || ""}">
       <div class="card-header">
         <div class="card-icon">
           <i class="${iconClass}"></i>
