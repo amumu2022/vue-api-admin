@@ -94,6 +94,45 @@ export function useUser(tableRef: Ref) {
       minWidth: 120
     },
     {
+      label: "角色",
+      prop: "roles_name",
+      minWidth: 120,
+      cellRenderer: ({ row }) => {
+        // roles_name 是一个数组，需要为每个角色创建一个标签
+        if (!row.roles_name || !Array.isArray(row.roles_name)) {
+          return null;
+        }
+
+        const getTagType = roleName => {
+          if (roleName === "管理员") {
+            return "danger"; // 红色
+          } else if (roleName === "SVIP用户") {
+            return "success"; // 绿色
+          } else if (roleName === "VIP用户") {
+            return "warning"; // 橙色
+          } else if (roleName === "普通用户") {
+            return "primary"; // 蓝色
+          }
+          return "info"; // 默认灰色
+        };
+
+        return (
+          <div class="flex gap-1 flex-wrap justify-center items-center">
+            {row.roles_name.map((role, index) => (
+              <el-tag
+                key={index}
+                size="small"
+                type={getTagType(role)}
+                effect="plain"
+              >
+                {role}
+              </el-tag>
+            ))}
+          </div>
+        );
+      }
+    },
+    {
       label: "邮箱",
       prop: "email",
       minWidth: 120
@@ -145,7 +184,7 @@ export function useUser(tableRef: Ref) {
     },
     {
       label: "最近调用",
-      minWidth: 140,
+      minWidth: 120,
       prop: "last_call",
       cellRenderer: ({ row }) => {
         const lastCall = row?.api_calls[0]?.last_call;
@@ -437,7 +476,7 @@ export function useUser(tableRef: Ref) {
     // 选中的角色列表
     const ids = (await getUserInfo(row.id)).data.roles_id ?? [];
     addDialog({
-      title: `分配 ${row.username} 用户的角色`,
+      title: `分配用户 ${row.username} 的角色`,
       props: {
         formInline: {
           username: row?.username ?? "",

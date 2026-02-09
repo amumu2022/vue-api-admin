@@ -1,0 +1,126 @@
+<!--
+ * @Author: XDTEAM
+ * @Date: 2026-06-06 18:44:08
+ * @LastEditTime: 2026-01-27 21:42:14
+ * @LastEditors: XDTEAM
+ * @Description: 专业会员页面
+-->
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>专业会员 - WanFeng API服务</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="icon" href="./resources/logo.png" type="image/png" />
+    <link rel="stylesheet" href="./css/welcome.css" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/layout.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 会员内容区 -->
+      <main class="vip-content">
+        <div class="vip-header">
+          <h1 class="vip-title">专业会员特权</h1>
+          <p class="vip-subtitle">升级为专业会员，享受更多API服务特权</p>
+        </div>
+
+        <div class="vip-comparison">
+          <div class="comparison-table">
+            <div class="badge">新年特惠</div>
+            <div class="header-row">
+              <div class="header-cell">会员权益</div>
+              <div class="header-cell">普通用户</div>
+              <div class="header-cell">VIP会员</div>
+            </div>
+            <div class="row">
+              <div class="cell">会员价格</div>
+              <div class="cell">-</div>
+              <div class="cell price">￥10/月</div>
+            </div>
+            <div class="row">
+              <div class="cell">接口无限调用</div>
+              <div class="cell">每日免费100次后消耗1点数</div>
+              <div class="cell">所有接口全部免费调用</div>
+            </div>
+            <div class="row">
+              <div class="cell">用户每日签到</div>
+              <div class="cell">随机75-125点数奖励</div>
+              <div class="cell">随机100-150点数奖励</div>
+            </div>
+            <div class="row">
+              <div class="cell">每日幸运夺宝</div>
+              <div class="cell">单次消耗60点数</div>
+              <div class="cell">单次消耗45点数</div>
+            </div>
+            <div class="row">
+              <div class="cell">推广返佣奖励</div>
+              <div class="cell">每人获得1000点数奖励</div>
+              <div class="cell">自己额外获得3天会员</div>
+            </div>
+            <div class="row">
+              <div class="cell">用户等级加速</div>
+              <div class="cell"><span class="cross">✕</span></div>
+              <div class="cell"><span class="checkmark">✓</span></div>
+            </div>
+            <div class="row">
+              <div class="cell">技术支持</div>
+              <div class="cell"><span class="cross">✕</span></div>
+              <div class="cell"><span class="checkmark">✓</span></div>
+            </div>
+            <div class="row">
+              <div class="cell">用户QQ群</div>
+              <div class="cell">923764525</div>
+              <div class="cell">923764525</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vip-plans-section">
+          <h2 class="section-title">选择适合您的会员计划</h2>
+          <div class="vip-plans">
+            <div class="plan">
+              <div class="plan-header">
+                <h3>月度会员</h3>
+                <div class="plan-price">¥29<span>/月</span></div>
+              </div>
+              <ul class="plan-features">
+                <li>所有API免费调用</li>
+                <li>每日签到100-150点数</li>
+                <li>专属会员主题</li>
+                <li>优先技术支持</li>
+              </ul>
+              <button class="plan-btn">立即开通</button>
+            </div>
+            <div class="plan featured">
+              <div class="plan-badge">推荐</div>
+              <div class="plan-header">
+                <h3>年度会员</h3>
+                <div class="plan-price">¥299<span>/年</span></div>
+              </div>
+              <ul class="plan-features">
+                <li>所有API免费调用</li>
+                <li>每日签到100-150点数</li>
+                <li>专属会员主题</li>
+                <li>优先技术支持</li>
+                <li>用户等级加速</li>
+                <li>专属用户群</li>
+              </ul>
+              <button class="plan-btn">立即开通</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        initLayout("vip", "晚风 API服务");
+      });
+    </script>
+  </body>
+</html>

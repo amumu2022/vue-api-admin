@@ -48,7 +48,7 @@ const {
           v-model="form.summary"
           placeholder="请输入API名称"
           clearable
-          class="!w-[135px]"
+          class="!w-[225px]"
           @keyup.enter="onSearch()"
         />
       </el-form-item>
@@ -57,7 +57,7 @@ const {
           v-model="form.enable"
           placeholder="请选择启用状态"
           clearable
-          class="!w-[135px]"
+          class="!w-[225px]"
           @change="onSearch()"
         >
           <el-option label="已激活" :value="true" />
@@ -70,7 +70,7 @@ const {
           v-model="form.free"
           placeholder="请选择收费状态"
           clearable
-          class="!w-[135px]"
+          class="!w-[225px]"
           @change="onSearch()"
         >
           <el-option label="免费" :value="true" />
@@ -83,11 +83,24 @@ const {
           v-model="form.token"
           placeholder="请选择Token状态"
           clearable
-          class="!w-[135px]"
+          class="!w-[225px]"
           @change="onSearch()"
         >
           <el-option label="需要" :value="true" />
           <el-option label="不需要" :value="false" />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="风险状态：" prop="token">
+        <el-select
+          v-model="form.token"
+          placeholder="请选择风险状态"
+          clearable
+          class="!w-[225px]"
+          @change="onSearch()"
+        >
+          <el-option label="危险API" :value="true" />
+          <el-option label="安全API" :value="false" />
         </el-select>
       </el-form-item>
 

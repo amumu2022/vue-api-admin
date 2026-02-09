@@ -23,6 +23,7 @@ export function useDept() {
     summary: "",
     enable: undefined,
     free: undefined,
+    risky: undefined,
     token: undefined,
     pageSize: 10,
     currentPage: 1
@@ -178,6 +179,28 @@ export function useDept() {
       }
     },
     {
+      label: "风险API",
+      minWidth: 80,
+      cellRenderer: scope => {
+        return scope.row.hasOwnProperty("risky") ? (
+          <el-switch
+            size={scope.props.size === "small" ? "small" : "default"}
+            loading={switchLoadMap.value[scope.index]?.loading}
+            v-model={scope.row.risky}
+            active-value={false}
+            inactive-value={true}
+            active-text="安全"
+            inactive-text="危险"
+            inline-prompt
+            style={switchStyle.value}
+            onChange={() => onChange(scope as any, "risky")}
+          />
+        ) : (
+          ""
+        );
+      }
+    },
+    {
       label: "消耗点数",
       prop: "points",
       minWidth: 60
@@ -229,6 +252,11 @@ export function useDept() {
         true: "需要Token",
         false: "不需要Token",
         name: "Token验证"
+      },
+      risky: {
+        true: "危险",
+        false: "安全",
+        name: "风险操作"
       }
     };
 
@@ -361,7 +389,6 @@ export function useDept() {
     loading.value = true;
     const { data } = await getApiRoutes(toRaw(form));
     const newData = data;
-
     dataList.value = newData;
     setTimeout(() => {
       loading.value = false;

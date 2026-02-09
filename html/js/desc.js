@@ -2,7 +2,7 @@
 function fetchApiModelData() {
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: `${CONFIG.API_BASE_URL}/api/apiInfo/getApiRoutesModel`,
+      url: `/api/apiInfo/getApiRoutesModel`,
       type: "GET",
       headers: {
         Accept: "application/json, text/plain, */*"
@@ -167,7 +167,7 @@ function copyApiUrl() {
   try {
     document.execCommand("copy");
     showToast("接口地址已复制!");
-  } catch (err) {
+  } catch {
     showToast("复制失败，请手动复制");
   }
 

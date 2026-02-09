@@ -4,13 +4,9 @@
 
 ![晚风API](https://socialify.git.ci/amumu2022/vue-api-admin/image?font=Jost&description=1&descriptionEditable=%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8EPython%E7%9A%84Api%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0&logo=https%3A%2F%2Fgitee.com%2Fxdteam-mumu%2Fvue-api-admin%2Fraw%2Fmaster%2Fdocs%2Fimage%2Flogo.png&name=1&owner=1&forks=1&issues=1&pulls=1&pattern=Diagonal+Stripes&stargazers=1&theme=Auto)
 
-![Python](https://img.shields.io/badge/Python->=3.10-red)
-![Node](https://img.shields.io/badge/Node->=V22.14.0-green)
-![Vue](https://img.shields.io/badge/Vue-v3.5.13-pink)
-![Element](https://img.shields.io/badge/Element-Plus-blue)
-[![QQ](https://img.shields.io/badge/Chat-QQ-91A1E7)](https://qm.qq.com/q/lebtXGD6qk)
 
 </div>
+
 
 基于 FastAPI + Vue3 + Element UI 的现代化前后端分离开发平台，融合了 RBAC 权限管理、动态路由和 JWT 鉴权，内置130+条api接口。
 
@@ -24,71 +20,80 @@
 - **恶意请求检测和自动加黑名单**：系统会自动检测恶意请求,并将其加入黑名单,以保护系统安全。
 - **自定义QPS限制**：可以对每条API进行QPS限制。
 
+
 ### 在线预览
 
-- API文档： <https://wanfeng-api.apifox.cn/> [![docs](https://img.shields.io/badge/点我跳转-API文档-7F0347)](https://wanfeng-api.apifox.cn)
-- 官网： <http://api.levial.dpdns.org/> [![web](https://img.shields.io/badge/点我跳转-官网-91A1E7)](http://api.levial.dpdns.org)
-- 服务地址： <http://api.levial.dpdns.org/api/v1/> [![server](https://img.shields.io/badge/点我跳转-服务地址-red)](http://api.levial.dpdns.org/api/v1)
+ - API文档： <https://wanfeng-api.apifox.cn/> [![docs](https://img.shields.io/badge/点我跳转-API文档-7F0347)](https://wanfeng-api.apifox.cn)
+ - 官网： <http://api.nonebot.top/> [![web](https://img.shields.io/badge/点我跳转-官网-91A1E7)](http://api.nonebot.top)
+ - 服务地址： <http://api.nonebot.top/api/v1/> [![server](https://img.shields.io/badge/点我跳转-服务地址-red)](http://api.nonebot.top/api/v1)
+
+
+### 欢迎页展示
+
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/欢迎页.png)
+
 
 ### API展示页
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/API展示.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/API展示.png)
+
 
 ### 登录页
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/登录页.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/登录页.png)
 
 ### 注册页
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/注册页.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/注册页.png)
 
 ### 自助查询
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/point查询.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/point查询.png)
 
 ### token重置
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/token重置.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/token重置.png)
 
 ### 工作台
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/首页.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/首页.png)
 
 ### 用户管理
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/用户管理.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/用户管理.png)
 
 ### 角色管理
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/角色管理.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/角色管理.png)
 
 ### 接口监控
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口监控.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口监控.png)
 
 ### 系统日志
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/系统日志.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/系统日志.png)
 
 ### 平台对接
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
 
 ### 黑名单管理
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/黑名单管理.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/黑名单管理.png)
 
 ### 路径详细
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/路径详细.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/路径详细.png)
 
 ### 接口请求
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口请求.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/接口请求.png)
 
 ### 平台对接
 
-![image](https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
+![image](https://images.weserv.nl/?url=https://gitee.com/xdteam-mumu/vue-api-admin/raw/master/docs/image/平台对接.png)
+
 
 ### 本地启动
 
@@ -120,7 +125,7 @@ source .myapi/bin/activate  # Linux/Mac
 
 ```sh
 poetry install
-```
+``` 
 
 4. 初始化数据
 
@@ -128,11 +133,13 @@ poetry install
 python cli/init.py
 ```
 
+
 5. 启动服务
 
 ```sh
 python app.py
 ```
+
 
 服务现在应该正在运行，访问 <http://localhost:8633/docs> 查看API文档
 
@@ -145,15 +152,15 @@ python app.py
 #### 方法一：下载打包源码
 
 ```text
-https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
+https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
 ```
 
 ```text
-https://ghfast.top/https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
+https://ghfast.top/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
 ```
 
 ```text
-https://gh-proxy.net/https://github.com/amumu2022/vue-api-admin/releases/download/best/dist.zip
+https://gh-proxy.net/https://github.com/amumu2022/vue-api-admin/releases/download/latest/dist.zip
 ```
 
 可直接部署到虚拟主机
@@ -188,6 +195,7 @@ password：123456
 进群的条件是给项目一个star，小小的star是作者维护下去的动力。
 
 你可以在群里提出任何疑问，我会尽快回复答疑。[![QQ](https://img.shields.io/badge/Chat-QQ-91A1E7)](https://qm.qq.com/q/lebtXGD6qk)
+QQ群聊：195228903
 
 ### 鸣谢
 
@@ -195,4 +203,4 @@ password：123456
 
 ### Visitors Count
 
-<img align="left" src = "https://profile-counter.glitch.me/vue-api-admin/count.svg" alt="Loading">
+<img align="left" src = "https://images.weserv.nl/?url=https://profile-counter.glitch.me/vue-api-admin/count.svg" alt="Loading">

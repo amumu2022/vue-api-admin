@@ -1,0 +1,302 @@
+/* 首页专用样式 - home.css */
+
+/* 欢迎区域 */
+.welcome-section {
+    margin-bottom: 60px;
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-banner::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.welcome-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 36px;
+}
+
+.welcome-title {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-description {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    color: var(--primary);
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.welcome-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 数据统计区域 */
+.stats-section {
+    margin-bottom: 60px;
+}
+
+.stats-section .section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--category-title);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.stats-section .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px 25px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 24px;
+}
+
+.stat-icon.api-icon {
+    background: rgba(52, 152, 219, 0.15);
+    color: #3498db;
+}
+
+.stat-icon.available-icon {
+    background: rgba(46, 204, 113, 0.15);
+    color: #2ecc71;
+}
+
+.stat-icon.today-icon {
+    background: rgba(241, 196, 15, 0.15);
+    color: #f1c40f;
+}
+
+.stat-icon.total-icon {
+    background: rgba(155, 89, 182, 0.15);
+    color: #9b59b6;
+}
+
+.stat-info {
+    margin-bottom: 10px;
+}
+
+.stat-number {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--category-title);
+    line-height: 1.2;
+}
+
+.stat-label {
+    display: block;
+    font-size: 16px;
+    color: var(--category-subtitle);
+    margin-top: 5px;
+}
+
+.stat-desc {
+    font-size: 13px;
+    color: var(--category-subtitle);
+    margin: 0;
+    opacity: 0.8;
+}
+
+/* 快速入口区域 */
+.quick-links-section {
+    margin-bottom: 60px;
+}
+
+.quick-links-section .section-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--category-title);
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.quick-links-section .section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.quick-link-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.quick-link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.quick-link-card i {
+    font-size: 36px;
+    margin-bottom: 15px;
+    display: block;
+    color: var(--primary);
+}
+
+.quick-link-card span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* 响应式适配 */
+@media (max-width: 1100px) {
+    .stats-grid,
+    .quick-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .welcome-title {
+        font-size: 32px;
+    }
+    
+    .welcome-description {
+        font-size: 16px;
+    }
+    
+    .welcome-banner {
+        padding: 40px 25px;
+    }
+    
+    .stats-grid,
+    .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+}
+
+/* 紧凑页脚样式 */
+.compact-footer {
+    padding: 20px !important;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.compact-footer p:first-child {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-links-inline {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links-inline a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.footer-links-inline a:hover {
+    text-decoration: underline;
+}
