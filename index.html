@@ -1,100 +1,165 @@
 <!--
  * @Author: XDTEAM
- * @Date: 2025-06-06 18:44:08
- * @LastEditTime: 2025-07-04 22:15:47
+ * @Date: 2026-06-06 18:44:08
+ * @LastEditTime: 2026-01-28 19:24:36
  * @LastEditors: XDTEAM
- * @Description: 
+ * @Description: 系统首页
 -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WanFeng API服务</title>
+    <title>WanFeng API服务 - 首页</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="icon" href="./resources/logo.png" type="image/png" />
     <link rel="stylesheet" href="./css/welcome.css" />
+    <link rel="stylesheet" href="./css/home.css" />
     <script src="./js/jquery.js"></script>
-    <script src="./js/welcome.js"></script>
+    <script src="./js/layout.js"></script>
   </head>
   <body>
     <div class="container">
-      <!-- 顶部导航栏 -->
-      <nav class="top-nav">
-        <div class="brand">
-          <div class="logo">小墩团队</div>
-          <a href="./admin/index.html" class="official-site">后台/注册</a>
-        </div>
-        <div class="user-section">
-          <button class="theme-toggle" id="theme-toggle">
-            <i class="fas fa-moon"></i>
-          </button>
-          <div class="user-info">Levial</div>
-        </div>
-      </nav>
-
-      <!-- 头部信息 -->
-      <header class="header">
-        <div class="tagline">WanFeng API服务</div>
-        <h1 class="main-title">晚风</h1>
-        <p class="description">提供免费、稳定、快速、高效的API服务</p>
-
-        <div class="stats">
-          <div class="stat-item">
-            <i class="fas fa-folder"></i>
-            <span
-              >共收录了
-              <span class="stat-value" id="api-count">0</span> 个接口项目</span
+      <!-- 首页内容区 -->
+      <main id="home-content" class="page-content active">
+        <section class="welcome-section">
+          <div class="welcome-banner">
+            <div class="welcome-icon"><i class="fas fa-cloud"></i></div>
+            <h1 class="welcome-title">欢迎使用晚风API</h1>
+            <p class="welcome-description">
+              晚风API是小墩免费提供公益API数据接口调用服务平台-我们致力于为用户提供稳定、快速的免费API数据接口服务。
+            </p>
+            <a href="./api.html" class="welcome-btn"
+              ><i class="fas fa-rocket"></i><span>浏览所有接口</span></a
             >
           </div>
-          <div class="stat-item">
-            <i class="fas fa-bolt"></i>
-            <span><span class="stat-value">99.9%</span> 可用性</span>
+        </section>
+
+        <section class="stats-section">
+          <h2 class="section-title">平台数据概览</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon api-icon"><i class="fas fa-plug"></i></div>
+              <div class="stat-info">
+                <span class="stat-number" id="total-api-count">0</span>
+                <span class="stat-label">API接口</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon available-icon">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-number" id="available-api-count">0</span>
+                <span class="stat-label">可用接口</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon today-icon">
+                <i class="fas fa-calendar-day"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-number" id="today-call-count">0</span>
+                <span class="stat-label">今日请求</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon total-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-number" id="total-call-count">0</span>
+                <span class="stat-label">累计请求</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <!-- 搜索框 -->
-        <div class="search-container">
-          <i class="fas fa-search search-icon"></i>
-          <input
-            type="text"
-            class="search-box"
-            id="api-search"
-            placeholder="搜索API名称 例如：网易云"
-          />
-        </div>
-      </header>
-
-      <!-- API内容区 -->
-      <main id="api-content">
-        <!-- 加载指示器 -->
-        <div class="loader">
-          <div class="spinner"></div>
-          <p>正在加载API数据，请稍候...</p>
-        </div>
+        <section class="quick-links-section">
+          <h2 class="section-title">快速入口</h2>
+          <div class="quick-links-grid">
+            <a href="./api.html" class="quick-link-card"
+              ><i class="fas fa-list"></i><span>API列表</span></a
+            >
+            <a href="./vip.html" class="quick-link-card"
+              ><i class="fas fa-crown"></i><span>专业会员</span></a
+            >
+            <a href="./admin/index.html" class="quick-link-card"
+              ><i class="fas fa-user"></i><span>用户中心</span></a
+            >
+            <a href="./desc.html" class="quick-link-card"
+              ><i class="fas fa-book"></i><span>接口文档</span></a
+            >
+          </div>
+        </section>
       </main>
-
-      <!-- 页脚 -->
-<!-- 页脚 -->
-    <footer class="footer">
-      <p>© 2025 WanFeng API服务 | 稳定、高效、安全的API服务</p>
-      <div class="footer-info" id="api-info">
-        <!-- API信息会通过JS渲染在这里 -->
-      </div>
-      <div class="footer-links">
-        <p>友情链接：</p>
-        <ul>
-          <li><a href="https://github.com" target="_blank">GitHub</a></li>
-          <li><a href="https://developer.mozilla.org/zh-CN/" target="_blank">MDN Web Docs</a></li>
-          <li><a href="https://www.w3schools.com/" target="_blank">W3Schools</a></li>
-        </ul>
-      </div>
-      <div class="footer-note">
-        <p>本服务由 WanFeng 团队提供技术支持，欢迎访问我们的 <a href="./about.html">关于我们</a> 页面了解更多。</p>
-      </div>
-    </footer>
     </div>
+
+    <script>
+      $(document).ready(function () {
+        // 初始化布局
+        initLayout("home", "晚风 API服务");
+        // 加载首页统计数据
+        loadHomeStats();
+      });
+
+      // 加载首页统计数据
+      function loadHomeStats() {
+        $.ajax({
+          url: "/api/apiInfo/getApiRoutes",
+          type: "POST",
+          headers: { "Content-Type": "application/json" },
+          data: JSON.stringify({ summary: "", pageSize: 10, currentPage: 1 }),
+          success: function (response) {
+            if (response.code === 200 && response.success && response.data) {
+              calculateAndDisplayStats(response.data);
+            }
+          }
+        });
+      }
+
+      // 计算并显示统计数据
+      function calculateAndDisplayStats(categories) {
+        let totalApis = 0,
+          availableApis = 0,
+          todayCalls = 0,
+          totalCalls = 0;
+        categories.forEach(function (category) {
+          if (category.children) {
+            category.children.forEach(function (api) {
+              totalApis++;
+              if (api.enable !== false) availableApis++;
+              todayCalls += api.today_call || 0;
+              totalCalls += api.total_call || 0;
+            });
+          }
+        });
+        animateNumber("total-api-count", totalApis);
+        animateNumber("available-api-count", availableApis);
+        animateNumber("today-call-count", todayCalls);
+        animateNumber("total-call-count", totalCalls);
+      }
+
+      // 数字动画
+      function animateNumber(elementId, targetNumber) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+        const duration = 1500,
+          startTime = performance.now();
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+          element.textContent = Math.floor(
+            targetNumber * easeProgress
+          ).toLocaleString();
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      }
+    </script>
   </body>
 </html>

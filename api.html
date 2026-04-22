@@ -1,0 +1,63 @@
+<!--
+ * @Author: XDTEAM
+ * @Date: 2026-06-06 18:44:08
+ * @LastEditTime: 2026-01-27 21:42:00
+ * @LastEditors: XDTEAM
+ * @Description: API接口列表页面
+-->
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API接口 - 晚风 API服务</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="icon" href="./resources/logo.png" type="image/png" />
+    <link rel="stylesheet" href="./css/welcome.css" />
+    <script src="./js/jquery.js"></script>
+    <script src="./js/layout.js"></script>
+    <script src="./js/api.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 头部信息 -->
+      <header class="header api-header-compact">
+        <h1 class="main-title api-title-compact">🔥 所有接口 🔥</h1>
+        <p class="description api-desc-compact">
+          为广大用户提供涵盖生活服务API、人工智能API等相关的API接口服务。
+        </p>
+        <!-- 搜索框 -->
+        <div class="search-container api-search-compact">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            type="text"
+            class="search-box"
+            id="api-search"
+            placeholder="搜索API名称 例如：网易云"
+          />
+        </div>
+        <!-- API分类导航 -->
+        <div class="api-nav-container">
+          <nav class="nav-pills" id="api-nav-pills"></nav>
+        </div>
+      </header>
+
+      <!-- API内容区 -->
+      <main id="api-content" class="page-content active">
+        <div class="loader">
+          <div class="spinner"></div>
+          <p>正在加载API数据，请稍候...</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        initLayout("api", "晚风 API服务");
+      });
+    </script>
+  </body>
+</html>
