@@ -63,6 +63,11 @@ export function useDept() {
       hide: true
     },
     {
+      label: "-",
+      prop: "free_daily_limit",
+      hide: true
+    },
+    {
       label: "函数名称",
       prop: "funcName",
       hide: true
@@ -334,7 +339,8 @@ export function useDept() {
           category: row?.category ?? "",
           qps: row?.qps ?? 0,
           daily_call_limit: row?.daily_call_limit ?? 0,
-          total_call_limit: row?.total_call_limit ?? 0
+          total_call_limit: row?.total_call_limit ?? 0,
+          free_daily_limit: row?.free_daily_limit ?? 0
         }
       },
       width: "46%",

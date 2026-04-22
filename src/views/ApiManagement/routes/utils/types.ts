@@ -17,6 +17,7 @@ interface FormItemProps {
   category?: string; // API分类
   daily_call_limit?: number; // 每日调用限制
   total_call_limit?: number; // 总调用限制
+  free_daily_limit?: number; // 免费API每日单用户限制
 }
 
 interface FormProps {

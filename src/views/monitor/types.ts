@@ -19,6 +19,7 @@ interface FormItemProps {
     body?: any;
   };
   exception?: string;
+  response_content?: string;
   create_time?: string;
   method?: string;
 }

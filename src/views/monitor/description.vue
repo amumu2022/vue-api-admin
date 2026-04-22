@@ -3,6 +3,8 @@ import dayjs from "dayjs";
 import { FormItemProps } from "./types";
 import { ref } from "vue";
 
+type TagType = "success" | "warning" | "info" | "primary" | "danger";
+
 const props = defineProps<FormItemProps>();
 
 const operationList = ref([
@@ -14,7 +16,7 @@ const operationList = ref([
   { value: 5, text: "上传" }
 ]);
 
-const etagTypes = ref([
+const etagTypes = ref<Array<{ value: number; type: TagType }>>([
   { value: 0, type: "info" }, // 默认使用info类型
   { value: 1, type: "primary" },
   { value: 2, type: "warning" },
@@ -23,12 +25,12 @@ const etagTypes = ref([
   { value: 5, type: "info" }
 ]);
 
-const methodTypes = ref({
+const methodTypes: Record<string, TagType> = {
   POST: "warning",
   PUT: "primary",
   GET: "success",
   DELETE: "danger"
-});
+};
 
 // 添加默认值处理
 const create_time = ref(
@@ -36,10 +38,10 @@ const create_time = ref(
     ? dayjs(props.create_time).format("YYYY年MM月DD日HH时mm分ss秒")
     : "-"
 );
-const methodType = props.request_params?.method
-  ? methodTypes.value[props.request_params.method]
+const methodType: TagType = props.request_params?.method
+  ? (methodTypes[props.request_params.method] ?? "info")
   : "info";
-const statustag =
+const statustag: TagType =
   props.status === undefined
     ? "info"
     : props.status === 0
@@ -47,14 +49,19 @@ const statustag =
       : "success";
 
 // 获取操作类型的安全访问方法
-const getOperationType = operation => {
+const getOperationType = (operation: number | undefined) => {
   const defaultOperation = { value: 0, text: "其他" };
   if (operation === undefined || operation === null) return defaultOperation;
   return operationList.value[operation] || defaultOperation;
 };
 
-const getEtagType = operation => {
-  const defaultType = { value: 0, type: "info" };
+const getEtagType = (
+  operation: number | undefined
+): { value: number; type: TagType } => {
+  const defaultType: { value: number; type: TagType } = {
+    value: 0,
+    type: "info"
+  };
   if (operation === undefined || operation === null) return defaultType;
   return etagTypes.value[operation] || defaultType;
 };
@@ -130,6 +137,17 @@ const getEtagType = operation => {
       <el-text style="color: rgb(221, 16, 16)">
         {{ props.exception || "-" }}
       </el-text>
+    </el-descriptions-item>
+    <el-descriptions-item :span="2" label="响应内容:">
+      <div
+        v-if="props.response_content"
+        style="max-height: 300px; overflow: auto"
+      >
+        <pre style="white-space: pre-wrap; word-break: break-all; margin: 0">{{
+          props.response_content
+        }}</pre>
+      </div>
+      <el-text v-else>-</el-text>
     </el-descriptions-item>
     <el-descriptions-item :span="2" label="操作时间:">
       {{ create_time }}

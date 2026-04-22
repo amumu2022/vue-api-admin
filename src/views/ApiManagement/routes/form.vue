@@ -24,7 +24,8 @@ const props = withDefaults(defineProps<FormProps>(), {
     qps: 0,
     category: "",
     daily_call_limit: 0,
-    total_call_limit: 0
+    total_call_limit: 0,
+    free_daily_limit: 0
   })
 });
 
@@ -127,6 +128,17 @@ defineExpose({ getRef });
             v-model="newFormInline.total_call_limit"
             clearable
             placeholder="请输入总调用限制"
+          />
+        </el-form-item>
+      </re-col>
+
+      <re-col :value="12" :xs="24" :sm="24">
+        <el-form-item label="免费每日限制(单用户)" prop="free_daily_limit">
+          <el-input-number
+            v-model="newFormInline.free_daily_limit"
+            :min="0"
+            clearable
+            placeholder="仅免费API生效，0为不限制"
           />
         </el-form-item>
       </re-col>
